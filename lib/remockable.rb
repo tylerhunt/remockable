@@ -1,3 +1,1 @@
-module Remockable
-  autoload :Matchers, 'remockable/matchers'
-end
+require 'remockable/matchers'

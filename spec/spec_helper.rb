@@ -11,5 +11,4 @@ end
 
 RSpec.configure do |config|
   config.mock_with(nil)
-  config.include(Remockable::Matchers)
 end
