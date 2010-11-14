@@ -14,9 +14,18 @@ describe "validates_presence_of" do
   subject { model.new }
 
   context "matcher" do
-    context "without options" do
+    context "with one attribute" do
       it { should validate_presence_of(:name) }
       it { should_not validate_presence_of(:email) }
+    end
+
+    context "without multiple attributes" do
+      before(:each) do
+        model.validates :name, :email, :presence => true
+      end
+
+      it { should validate_presence_of(:name) }
+      it { should validate_presence_of(:email) }
     end
 
     context "with :message option" do

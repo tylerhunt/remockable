@@ -8,6 +8,7 @@ Gem::Specification.new do |gem|
   gem.files = Dir['LICENSE', 'lib/**/*']
 
   gem.add_dependency 'activemodel', '~> 3.0.1'
+  gem.add_dependency 'activesupport', '~> 3.0.1'
   gem.add_dependency 'rspec-core', '~> 2.0.1'
   gem.add_dependency 'rspec-expectations', '~> 2.0.1'
 end

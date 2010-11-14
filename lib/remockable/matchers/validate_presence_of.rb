@@ -1,26 +1,30 @@
-RSpec::Matchers.define(:validate_presence_of) do |attribute, options|
-  @attribute = attribute
-  @options = options || {}
+RSpec::Matchers.define(:validate_presence_of) do |*attributes|
+  @options = attributes.extract_options! || {}
+  @attributes = attributes
 
-  match do |actual, options|
-    subject.send(:"#{attribute}=", nil)
-    !(valid? || empty_errors?) && matches_error?
+  match do |actual|
+    @attributes.inject(true) do |result, attribute|
+      subject.send(:"#{attribute}=", nil)
+      result && !(valid? || empty_errors?(attribute)) && matches_error?(attribute)
+    end
   end
 
-  def valid?
+  def message(message)
+    @options[:message] = message
+    self
+  end
+
+  def valid? #:nodoc:
     subject.valid?
   end
 
-  def empty_errors?
-    subject.errors[@attribute].blank?
+  def empty_errors?(attribute) #:nodoc:
+    subject.errors[attribute].blank?
   end
 
-  def message
-    @options[:message] || subject.errors.generate_message(@attribute, :blank)
-  end
-
-  def matches_error?
-    subject.errors[@attribute].include?(message)
+  def matches_error?(attribute) #:nodoc:
+    message = @options[:message] || subject.errors.generate_message(attribute, :blank)
+    subject.errors[attribute].include?(message)
   end
 
   failure_message_for_should do |actual|
@@ -32,6 +36,6 @@ RSpec::Matchers.define(:validate_presence_of) do |attribute, options|
   end
 
   description do
-    "require #{attribute} to be set"
+    "require #{@attributes.to_sentence} to be set"
   end
 end
