@@ -40,15 +40,12 @@ describe 'validate_presence_of' do
     create_message_specs(self)
   end
 
-  pending do
-    describe 'macros' do
-      before(:each){ define_and_validate }
+  pending 'macros' do
+    before(:each){ define_and_validate }
 
-      should_validate_presence_of(:size)
-      should_validate_presence_of(:title)
-      should_validate_presence_of(:size, :title)
-      should_not_validate_presence_of(:category)
-    end
+    should_validate_presence_of(:size)
+    should_validate_presence_of(:title)
+    should_validate_presence_of(:size, :title)
+    should_not_validate_presence_of(:category)
   end
 end
-

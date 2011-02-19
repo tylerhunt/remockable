@@ -1,30 +1,20 @@
 RSpec::Matchers.define(:validate_presence_of) do |*attributes|
-  @options = attributes.extract_options! || {}
+  @options = attributes.extract_options!
   @attributes = attributes
 
   match do |actual|
     @attributes.inject(true) do |result, attribute|
-      subject.send(:"#{attribute}=", nil)
-      result && !(valid? || empty_errors?(attribute)) && matches_error?(attribute)
+      validator = subject.class.validators_on(attribute).detect do |validator|
+        validator.kind == :presence
+      end
+
+      validator && validator.options == @options
     end
   end
 
   def message(message)
     @options[:message] = message
     self
-  end
-
-  def valid? #:nodoc:
-    subject.valid?
-  end
-
-  def empty_errors?(attribute) #:nodoc:
-    subject.errors[attribute].blank?
-  end
-
-  def matches_error?(attribute) #:nodoc:
-    message = @options[:message] || subject.errors.generate_message(attribute, :blank)
-    subject.errors[attribute].include?(message)
   end
 
   failure_message_for_should do |actual|

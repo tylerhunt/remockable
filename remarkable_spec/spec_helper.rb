@@ -1,4 +1,5 @@
 require 'active_model'
+require 'active_support/core_ext/hash/slice'
 require 'active_support/core_ext/string/inflections'
 
 $:.unshift(File.expand_path('../lib', File.dirname(__FILE__)))
@@ -8,8 +9,4 @@ require 'remockable'
 # in ./support/ and its subdirectories.
 Dir[File.expand_path('../support/**/*.rb', __FILE__)].each do |file|
   require(file)
-end
-
-RSpec.configure do |config|
-  config.mock_with(nil)
 end

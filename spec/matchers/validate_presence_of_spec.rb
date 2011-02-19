@@ -1,14 +1,19 @@
 require 'spec_helper'
 
 describe "validates_presence_of" do
+  let(:attributes) { :name }
+  let(:options) { true }
+
   let(:model) do
     build_class(:User) do
       include ActiveModel::Validations
 
       attr_accessor :name, :email
-
-      validates :name, :presence => true
     end
+  end
+
+  before(:each) do
+    model.validates(*attributes, :presence => options)
   end
 
   subject { model.new }
@@ -19,26 +24,22 @@ describe "validates_presence_of" do
       it { should_not validate_presence_of(:email) }
     end
 
-    context "without multiple attributes" do
-      before(:each) do
-        model.validates :name, :email, :presence => true
-      end
+    context "with multiple attributes" do
+      let(:attributes) { [:name, :email] }
 
       it { should validate_presence_of(:name) }
       it { should validate_presence_of(:email) }
     end
 
     context "with :message option" do
-      before(:each) do
-        model.validates :name, :presence => { :message => 'is required' }
-      end
+      let(:options) { { :message => 'is required' } }
 
       it { should validate_presence_of(:name, :message => 'is required') }
       it { should_not validate_presence_of(:name, :message => 'invalid') }
     end
   end
 
-  context "message" do
+  context "description" do
     context "for a defined validation" do
       let(:matcher) { validate_presence_of(:name) }
 
