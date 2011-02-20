@@ -14,14 +14,17 @@ RSpec::Matchers.define(:validate_length_of) do |*attributes|
         validator.kind == :length
       end
 
-      expected = @expected.dup
+      expected = normalize_expected
+      validator && validator.options.slice(*expected.keys) == expected
+    end
+  end
 
+  def normalize_expected
+    expected.dup.tap do |expected|
       if within = expected.delete(:within) || expected.delete(:in)
         expected[:minimum] = within.first
         expected[:maximum] = within.last
       end
-
-      validator && validator.options.slice(*expected.keys) == expected
     end
   end
 
@@ -34,7 +37,7 @@ RSpec::Matchers.define(:validate_length_of) do |*attributes|
   end
 
   description do
-    with = " with #{@expected.inspect}" if @expected.any?
+    with = " with #{expected.inspect}" if expected.any?
     "validate length of #{@attributes.to_sentence}#{with}"
   end
 end

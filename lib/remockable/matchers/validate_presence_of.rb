@@ -13,7 +13,7 @@ RSpec::Matchers.define(:validate_presence_of) do |*attributes|
         validator.kind == :presence
       end
 
-      validator && validator.options.slice(*@expected.keys) == expected
+      validator && validator.options.slice(*expected.keys) == expected
     end
   end
 
@@ -26,7 +26,7 @@ RSpec::Matchers.define(:validate_presence_of) do |*attributes|
   end
 
   description do
-    with = " with #{@expected.inspect}" if @expected.any?
+    with = " with #{expected.inspect}" if expected.any?
     "validate presence of #{@attributes.to_sentence}#{with}"
   end
 end

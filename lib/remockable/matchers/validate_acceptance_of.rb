@@ -5,7 +5,7 @@ RSpec::Matchers.define(:validate_acceptance_of) do |*attributes|
   @attributes = attributes
 
   unsupported_options %w(if unless)
-  valid_options %w(message on allow_nil accept )
+  valid_options %w(message on allow_nil accept)
 
   match do |actual|
     @attributes.inject(true) do |result, attribute|
@@ -13,9 +13,7 @@ RSpec::Matchers.define(:validate_acceptance_of) do |*attributes|
         validator.kind == :acceptance
       end
 
-      expected = @expected.dup
-
-      validator && validator.options.slice(*@expected.keys) == expected
+      validator && validator.options.slice(*expected.keys) == expected
     end
   end
 
@@ -28,7 +26,7 @@ RSpec::Matchers.define(:validate_acceptance_of) do |*attributes|
   end
 
   description do
-    with = " with #{@expected.inspect}" if @expected.any?
+    with = " with #{expected.inspect}" if expected.any?
     "validate acceptance of #{@attributes.to_sentence}#{with}"
   end
 end
