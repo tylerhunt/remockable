@@ -79,6 +79,13 @@ describe "validates_length_of" do
       it { should_not validate_length_of(:name, :minimum => 10) }
     end
 
+    context "with option :on" do
+      let(:options) { { :is => 5, :on => :create } }
+
+      it { should validate_length_of(:name, :on => :create) }
+      it { should_not validate_length_of(:name, :on => :update) }
+    end
+
     context "with option :too_long" do
       let(:options) { { :is => 5, :too_long => 'is too long!' } }
 
