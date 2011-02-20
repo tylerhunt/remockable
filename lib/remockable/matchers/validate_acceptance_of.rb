@@ -1,6 +1,7 @@
 RSpec::Matchers.define(:validate_acceptance_of) do |*attributes|
   extend Remockable::Helpers
 
+  @type = :acceptance
   @expected = attributes.extract_options!
   @attributes = attributes
 
@@ -8,11 +9,7 @@ RSpec::Matchers.define(:validate_acceptance_of) do |*attributes|
   valid_options %w(message on allow_nil accept)
 
   match do |actual|
-    @attributes.inject(true) do |result, attribute|
-      validator = subject.class.validators_on(attribute).detect do |validator|
-        validator.kind == :acceptance
-      end
-
+    validate_attributes do |validator|
       validator && validator.options.slice(*expected.keys) == expected
     end
   end
@@ -27,6 +24,6 @@ RSpec::Matchers.define(:validate_acceptance_of) do |*attributes|
 
   description do
     with = " with #{expected.inspect}" if expected.any?
-    "validate acceptance of #{@attributes.to_sentence}#{with}"
+    "validate #{type} of #{@attributes.to_sentence}#{with}"
   end
 end

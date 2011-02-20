@@ -1,6 +1,7 @@
 RSpec::Matchers.define(:validate_length_of) do |*attributes|
   extend Remockable::Helpers
 
+  @type = :length
   @expected = attributes.extract_options!
   @attributes = attributes
 
@@ -9,11 +10,7 @@ RSpec::Matchers.define(:validate_length_of) do |*attributes|
     too_long too_short within wrong_length)
 
   match do |actual|
-    @attributes.inject(true) do |result, attribute|
-      validator = subject.class.validators_on(attribute).detect do |validator|
-        validator.kind == :length
-      end
-
+    validate_attributes do |validator|
       expected = normalize_expected
       validator && validator.options.slice(*expected.keys) == expected
     end
@@ -38,6 +35,6 @@ RSpec::Matchers.define(:validate_length_of) do |*attributes|
 
   description do
     with = " with #{expected.inspect}" if expected.any?
-    "validate length of #{@attributes.to_sentence}#{with}"
+    "validate #{type} of #{@attributes.to_sentence}#{with}"
   end
 end
