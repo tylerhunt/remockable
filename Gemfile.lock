@@ -4,8 +4,8 @@ PATH
     remockable (0.0.1)
       activemodel (~> 3.0.0)
       activesupport (~> 3.0.0)
-      rspec-core (~> 2.5.0)
-      rspec-expectations (~> 2.5.0)
+      rspec-core (~> 2.0)
+      rspec-expectations (~> 2.0)
 
 GEM
   remote: http://rubygems.org/
@@ -30,6 +30,6 @@ DEPENDENCIES
   activemodel (~> 3.0.0)
   activesupport (~> 3.0.0)
   remockable!
-  rspec-core (~> 2.5.0)
-  rspec-expectations (~> 2.5.0)
-  rspec-mocks (~> 2.5.0)
+  rspec-core (~> 2.0)
+  rspec-expectations (~> 2.0)
+  rspec-mocks (~> 2.0)
