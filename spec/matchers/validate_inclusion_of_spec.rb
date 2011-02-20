@@ -18,75 +18,54 @@ describe "validates_inclusion_of" do
 
   subject { model.new }
 
-  context "matcher" do
-    context "with a single attribute" do
-      it { should validate_inclusion_of(:admin, :in => [true, false]) }
-      it { should_not validate_inclusion_of(:manager, :in => [true, false]) }
-    end
-
-    context "with multiple attributes" do
-      let(:attributes) { [:admin, :manager] }
-
-      it { should validate_inclusion_of(:admin, :manager, :in => [true, false]) }
-    end
-
-    context "with option :allow_blank" do
-      let(:options) { { :in => [true, false], :allow_blank => true } }
-
-      it { should validate_inclusion_of(:admin, :in => [true, false], :allow_blank => true) }
-      it { should_not validate_inclusion_of(:admin, :in => [true, false], :allow_blank => false) }
-    end
-
-    context "with option :allow_nil" do
-      let(:options) { { :in => [true, false], :allow_nil => true } }
-
-      it { should validate_inclusion_of(:admin, :in => [true, false], :allow_nil => true) }
-      it { should_not validate_inclusion_of(:admin, :in => [true, false], :allow_nil => false) }
-    end
-
-    context "with option :in" do
-      let(:options) { { :in => [true, false] } }
-
-      it { should validate_inclusion_of(:admin, :in => [true, false]) }
-      it { should_not validate_inclusion_of(:admin, :in => %w(superuser)) }
-    end
-
-    context "with option :message" do
-      let(:options) { { :in => [true, false], :message => 'is invalid!' } }
-
-      it { should validate_inclusion_of(:admin, :in => [true, false], :message => 'is invalid!') }
-      it { should_not validate_inclusion_of(:admin, :in => [true, false], :message => 'invalid') }
-    end
-
-    has_unsupported_option(:validate_inclusion_of, :if => :allow_validation)
-    has_unsupported_option(:validate_inclusion_of, :unless => :allow_validation)
-    has_unknown_option(:validate_inclusion_of, :xxx => true)
+  context "with a single attribute" do
+    it { should validate_inclusion_of(:admin, :in => [true, false]) }
+    it { should_not validate_inclusion_of(:manager, :in => [true, false]) }
   end
 
-  context "description" do
-    context "for a defined validation" do
-      let(:matcher) { validate_inclusion_of(:admin, :in => [true, false]) }
+  context "with multiple attributes" do
+    let(:attributes) { [:admin, :manager] }
 
-      it 'contains a description' do
-        matcher.description.should ==
-          'validate inclusion of admin with {:in=>[true, false]}'
-      end
-    end
+    it { should validate_inclusion_of(:admin, :manager, :in => [true, false]) }
+  end
 
-    context "for an undefined validation" do
-      let(:matcher) { validate_inclusion_of(:admin, :in => [true, false]) }
+  with_option(:allow_blank, :in => [true, false], :allow_blank => true) do
+    it { should validate_inclusion_of(:admin, :in => [true, false], :allow_blank => true) }
+    it { should_not validate_inclusion_of(:admin, :in => [true, false], :allow_blank => false) }
+  end
 
-      before(:each) { matcher.matches?(subject) }
+  with_option(:allow_nil, :in => [true, false], :allow_nil => true) do
+    it { should validate_inclusion_of(:admin, :in => [true, false], :allow_nil => true) }
+    it { should_not validate_inclusion_of(:admin, :in => [true, false], :allow_nil => false) }
+  end
 
-      it "sets a custom failure message for should" do
-        matcher.failure_message.should ==
-          'Expected User to validate inclusion of admin with {:in=>[true, false]}'
-      end
+  with_option(:in, :in => [true, false]) do
+    it { should validate_inclusion_of(:admin, :in => [true, false]) }
+    it { should_not validate_inclusion_of(:admin, :in => %w(superuser)) }
+  end
 
-      it "sets a custom failure message for should not" do
-        matcher.negative_failure_message.should ==
-          'Did not expect User to validate inclusion of admin with {:in=>[true, false]}'
-      end
-    end
+  with_option(:message, :in => [true, false], :message => 'is invalid!') do
+    it { should validate_inclusion_of(:admin, :in => [true, false], :message => 'is invalid!') }
+    it { should_not validate_inclusion_of(:admin, :in => [true, false], :message => 'invalid') }
+  end
+
+  with_unsupported_option(:if) do
+    validate_inclusion_of(:if => :allow_validation)
+  end
+
+  with_unsupported_option(:unless) do
+    validate_inclusion_of(:unless => :skip_validation)
+  end
+
+  with_unknown_option(:xxx) do
+    validate_inclusion_of(:xxx => true)
+  end
+
+  has_description do
+    validate_inclusion_of(:admin, :in => [true, false])
+  end
+
+  has_failure_messages do
+    validate_inclusion_of(:manager, :in => [true, false])
   end
 end

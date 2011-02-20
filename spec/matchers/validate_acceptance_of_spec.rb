@@ -18,74 +18,54 @@ describe "validates_acceptance_of" do
 
   subject { model.new }
 
-  context "matcher" do
-    context "with a single attribute" do
-      it { should validate_acceptance_of(:terms) }
-      it { should_not validate_acceptance_of(:eula) }
-    end
-
-    context "with multiple attributes" do
-      let(:attributes) { [:terms, :eula] }
-
-      it { should validate_acceptance_of(:terms, :eula) }
-    end
-
-    context "with option :accept" do
-      let(:options) { { :accept => 'TRUE' } }
-
-      it { should validate_acceptance_of(:terms, :accept => 'TRUE') }
-      it { should_not validate_acceptance_of(:terms, :accept => 'FALSE') }
-    end
-
-    context "with option :allow_nil" do
-      let(:options) { { :allow_nil => true } }
-
-      it { should validate_acceptance_of(:terms, :allow_nil => true) }
-      it { should_not validate_acceptance_of(:terms, :allow_nil => false) }
-    end
-
-    context "with option :message" do
-      let(:options) { { :message => 'must agree!' } }
-
-      it { should validate_acceptance_of(:terms, :message => 'must agree!') }
-      it { should_not validate_acceptance_of(:terms, :message => 'invalid') }
-    end
-
-    context "with option :on" do
-      let(:options) { { :on => :create } }
-
-      it { should validate_acceptance_of(:terms, :on => :create) }
-      it { should_not validate_acceptance_of(:terms, :on => :update) }
-    end
-
-    has_unsupported_option(:validate_acceptance_of, :if => :allow_validation)
-    has_unsupported_option(:validate_acceptance_of, :unless => :allow_validation)
-    has_unknown_option(:validate_acceptance_of, :xxx => true)
+  context "with a single attribute" do
+    it { should validate_acceptance_of(:terms) }
+    it { should_not validate_acceptance_of(:eula) }
   end
 
-  context "description" do
-    context "for a defined validation" do
-      let(:matcher) { validate_acceptance_of(:terms) }
+  context "with multiple attributes" do
+    let(:attributes) { [:terms, :eula] }
 
-      it 'contains a description' do
-        matcher.description.should == 'validate acceptance of terms'
-      end
-    end
+    it { should validate_acceptance_of(:terms, :eula) }
+  end
 
-    context "for an undefined validation" do
-      let(:matcher) { validate_acceptance_of(:eula) }
+  with_option(:accept, :accept => 'TRUE') do
+    it { should validate_acceptance_of(:terms, :accept => 'TRUE') }
+    it { should_not validate_acceptance_of(:terms, :accept => 'FALSE') }
+  end
 
-      before(:each) { matcher.matches?(subject) }
+  with_option(:allow_nil, :allow_nil => true) do
+    it { should validate_acceptance_of(:terms, :allow_nil => true) }
+    it { should_not validate_acceptance_of(:terms, :allow_nil => false) }
+  end
 
-      it "sets a custom failure message for should" do
-        matcher.failure_message.should ==
-          'Expected User to validate acceptance of eula'
-      end
+  with_option(:message, :message => 'must agree!') do
+    it { should validate_acceptance_of(:terms, :message => 'must agree!') }
+    it { should_not validate_acceptance_of(:terms, :message => 'invalid') }
+  end
 
-      it "sets a custom failure message for should not" do
-        matcher.negative_failure_message.should ==
-          'Did not expect User to validate acceptance of eula'
-      end
-    end
+  with_option(:on, :on => :create) do
+    it { should validate_acceptance_of(:terms, :on => :create) }
+    it { should_not validate_acceptance_of(:terms, :on => :update) }
+  end
+
+  with_unsupported_option(:if) do
+    validate_acceptance_of(:if => :allow_validation)
+  end
+
+  with_unsupported_option(:unless) do
+    validate_acceptance_of(:unless => :skip_validation)
+  end
+
+  with_unknown_option(:xxx) do
+    validate_acceptance_of(:xxx => true)
+  end
+
+  has_description do
+    validate_acceptance_of(:terms)
+  end
+
+  has_failure_messages do
+    validate_acceptance_of(:eula)
   end
 end

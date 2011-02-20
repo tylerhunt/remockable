@@ -18,132 +18,98 @@ describe "validates_length_of" do
 
   subject { model.new }
 
-  context "matcher" do
-    context "with a single attribute" do
-      it { should validate_length_of(:name) }
-      it { should_not validate_length_of(:email) }
-    end
-
-    context "with multiple attributes" do
-      let(:attributes) { [:name, :email] }
-
-      it { should validate_length_of(:name, :email) }
-    end
-
-    context "with option :allow_blank" do
-      let(:options) { { :is => 5, :allow_blank => true } }
-
-      it { should validate_length_of(:name, :allow_blank => true) }
-      it { should_not validate_length_of(:name, :allow_blank => false) }
-    end
-
-    context "with option :allow_nil" do
-      let(:options) { { :is => 5, :allow_nil => true } }
-
-      it { should validate_length_of(:name, :allow_nil => true) }
-      it { should_not validate_length_of(:name, :allow_nil => false) }
-    end
-
-    context "with option :in" do
-      let(:options) { { :in => 1..10 } }
-
-      it { should validate_length_of(:name, :in => 1..10) }
-      it { should_not validate_length_of(:name, :in => 1..5) }
-    end
-
-    context "with option :is" do
-      let(:options) { { :is => 5 } }
-
-      it { should validate_length_of(:name, :is => 5) }
-      it { should_not validate_length_of(:name, :is => 10) }
-    end
-
-    context "with option :maximum" do
-      let(:options) { { :maximum => 5 } }
-
-      it { should validate_length_of(:name, :maximum => 5) }
-      it { should_not validate_length_of(:name, :maximum => 10) }
-    end
-
-    context "with option :message" do
-      let(:options) { { :is => 5, :message => 'wrong length!' } }
-
-      it { should validate_length_of(:name, :message => 'wrong length!') }
-      it { should_not validate_length_of(:name, :message => 'invalid') }
-    end
-
-    context "with option :minimum" do
-      let(:options) { { :minimum => 5 } }
-
-      it { should validate_length_of(:name, :minimum => 5) }
-      it { should_not validate_length_of(:name, :minimum => 10) }
-    end
-
-    context "with option :on" do
-      let(:options) { { :is => 5, :on => :create } }
-
-      it { should validate_length_of(:name, :on => :create) }
-      it { should_not validate_length_of(:name, :on => :update) }
-    end
-
-    context "with option :too_long" do
-      let(:options) { { :is => 5, :too_long => 'is too long!' } }
-
-      it { should validate_length_of(:name, :too_long => 'is too long!') }
-      it { should_not validate_length_of(:name, :too_long => 'invalid') }
-    end
-
-    context "with option :too_short" do
-      let(:options) { { :is => 5, :too_short => 'is too short!' } }
-
-      it { should validate_length_of(:name, :too_short => 'is too short!') }
-      it { should_not validate_length_of(:name, :too_short => 'invalid') }
-    end
-
-    context "with option :within" do
-      let(:options) { { :within => 1..10 } }
-
-      it { should validate_length_of(:name, :within => 1..10) }
-      it { should_not validate_length_of(:name, :within => 1..5) }
-    end
-
-    context "with option :wrong_length" do
-      let(:options) { { :is => 5, :wrong_length => 'is not five!' } }
-
-      it { should validate_length_of(:name, :wrong_length => 'is not five!') }
-      it { should_not validate_length_of(:name, :wrong_length => 'invalid') }
-    end
-
-    has_unsupported_option(:validate_length_of, :if => :allow_validation)
-    has_unsupported_option(:validate_length_of, :unless => :allow_validation)
-    has_unsupported_option(:validate_length_of, :tokenizer => lambda { |string| string.scan(/\w+/) } )
-    has_unknown_option(:validate_length_of, :xxx => true)
+  context "with a single attribute" do
+    it { should validate_length_of(:name) }
+    it { should_not validate_length_of(:email) }
   end
 
-  context "description" do
-    context "for a defined validation" do
-      let(:matcher) { validate_length_of(:name, :within => 1..10) }
+  context "with multiple attributes" do
+    let(:attributes) { [:name, :email] }
 
-      it 'contains a description' do
-        matcher.description.should ==
-          'validate length of name with {:within=>1..10}'
-      end
-    end
+    it { should validate_length_of(:name, :email) }
+  end
 
-    context "for an undefined validation" do
-      let(:matcher) { validate_length_of(:email, :within => 1..10) }
+  with_option(:allow_blank, :is => 5, :allow_blank => true) do
+    it { should validate_length_of(:name, :allow_blank => true) }
+    it { should_not validate_length_of(:name, :allow_blank => false) }
+  end
 
-      before(:each) { matcher.matches?(subject) }
+  with_option(:allow_nil, :is => 5, :allow_nil => true) do
+    it { should validate_length_of(:name, :allow_nil => true) }
+    it { should_not validate_length_of(:name, :allow_nil => false) }
+  end
 
-      it "sets a custom failure message for should" do
-        matcher.failure_message.should ==
-          'Expected User to validate length of email with {:within=>1..10}'
-      end
+  with_option(:in, :in => 1..10) do
+    it { should validate_length_of(:name, :in => 1..10) }
+    it { should_not validate_length_of(:name, :in => 1..5) }
+  end
 
-      it "sets a custom failure message for should not" do
-        matcher.negative_failure_message.should ==
-          'Did not expect User to validate length of email with {:within=>1..10}'
-      end
-    end
+  with_option(:is, :is => 5) do
+    it { should validate_length_of(:name, :is => 5) }
+    it { should_not validate_length_of(:name, :is => 10) }
+  end
+
+  with_option(:maximum, :maximum => 5) do
+    it { should validate_length_of(:name, :maximum => 5) }
+    it { should_not validate_length_of(:name, :maximum => 10) }
+  end
+
+  with_option(:message, :is => 5, :message => 'wrong length!') do
+    it { should validate_length_of(:name, :message => 'wrong length!') }
+    it { should_not validate_length_of(:name, :message => 'invalid') }
+  end
+
+  with_option(:minimum, :minimum => 5) do
+    it { should validate_length_of(:name, :minimum => 5) }
+    it { should_not validate_length_of(:name, :minimum => 10) }
+  end
+
+  with_option(:on, :is => 5, :on => :create) do
+    it { should validate_length_of(:name, :on => :create) }
+    it { should_not validate_length_of(:name, :on => :update) }
+  end
+
+  with_option(:too_long, :is => 5, :too_long => 'is too long!') do
+    it { should validate_length_of(:name, :too_long => 'is too long!') }
+    it { should_not validate_length_of(:name, :too_long => 'invalid') }
+  end
+
+  with_option(:too_short, :is => 5, :too_short => 'is too short!') do
+    it { should validate_length_of(:name, :too_short => 'is too short!') }
+    it { should_not validate_length_of(:name, :too_short => 'invalid') }
+  end
+
+  with_option(:within, :within => 1..10) do
+    it { should validate_length_of(:name, :within => 1..10) }
+    it { should_not validate_length_of(:name, :within => 1..5) }
+  end
+
+  with_option(:wrong_length, :is => 5, :wrong_length => 'is not five!') do
+    it { should validate_length_of(:name, :wrong_length => 'is not five!') }
+    it { should_not validate_length_of(:name, :wrong_length => 'invalid') }
+  end
+
+  with_unsupported_option(:if) do
+    validate_length_of(:if => :allow_validation)
+  end
+
+  with_unsupported_option(:unless) do
+    validate_length_of(:unless => :skip_validation)
+  end
+
+  with_unsupported_option(:tokenizer) do
+    validate_length_of(:tokenizer => lambda { |string| string.scan(/\w+/) })
+  end
+
+  with_unknown_option(:xxx) do
+    validate_length_of(:xxx => true)
+  end
+
+  has_description do
+    validate_length_of(:name, :within => 1..10)
+  end
+
+  has_failure_messages do
+    validate_length_of(:email, :within => 1..10)
   end
 end

@@ -18,60 +18,44 @@ describe "validates_presence_of" do
 
   subject { model.new }
 
-  context "matcher" do
-    context "with a single attribute" do
-      it { should validate_presence_of(:name) }
-      it { should_not validate_presence_of(:email) }
-    end
-
-    context "with multiple attributes" do
-      let(:attributes) { [:name, :email] }
-
-      it { should validate_presence_of(:name, :email) }
-    end
-
-    context "with option :message" do
-      let(:options) { { :message => 'is required!' } }
-
-      it { should validate_presence_of(:name, :message => 'is required!') }
-      it { should_not validate_presence_of(:name, :message => 'invalid') }
-    end
-
-    context "with option :on" do
-      let(:options) { { :on => :create } }
-
-      it { should validate_presence_of(:name, :on => :create) }
-      it { should_not validate_presence_of(:name, :on => :update) }
-    end
-
-    has_unsupported_option(:validate_presence_of, :if => :allow_validation)
-    has_unsupported_option(:validate_presence_of, :unless => :allow_validation)
-    has_unknown_option(:validate_presence_of, :xxx => true)
+  context "with a single attribute" do
+    it { should validate_presence_of(:name) }
+    it { should_not validate_presence_of(:email) }
   end
 
-  context "description" do
-    context "for a defined validation" do
-      let(:matcher) { validate_presence_of(:name) }
+  context "with multiple attributes" do
+    let(:attributes) { [:name, :email] }
 
-      it 'contains a description' do
-        matcher.description.should == 'validate presence of name'
-      end
-    end
+    it { should validate_presence_of(:name, :email) }
+  end
 
-    context "for an undefined validation" do
-      let(:matcher) { validate_presence_of(:email) }
+  with_option(:message, :message => 'is required!') do
+    it { should validate_presence_of(:name, :message => 'is required!') }
+    it { should_not validate_presence_of(:name, :message => 'invalid') }
+  end
 
-      before(:each) { matcher.matches?(subject) }
+  with_option(:on, :on => :create) do
+    it { should validate_presence_of(:name, :on => :create) }
+    it { should_not validate_presence_of(:name, :on => :update) }
+  end
 
-      it "sets a custom failure message for should" do
-        matcher.failure_message.should ==
-          'Expected User to validate presence of email'
-      end
+  with_unsupported_option(:if) do
+    validate_presence_of(:if => :allow_validation)
+  end
 
-      it "sets a custom failure message for should not" do
-        matcher.negative_failure_message.should ==
-          'Did not expect User to validate presence of email'
-      end
-    end
+  with_unsupported_option(:unless) do
+    validate_presence_of(:unless => :skip_validation)
+  end
+
+  with_unknown_option(:xxx) do
+    validate_presence_of(:xxx => true)
+  end
+
+  has_description do
+    validate_presence_of(:name)
+  end
+
+  has_failure_messages do
+    validate_presence_of(:email)
   end
 end
