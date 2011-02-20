@@ -1,6 +1,11 @@
 RSpec::Matchers.define(:validate_presence_of) do |*attributes|
-  @options = attributes.extract_options!
+  extend Remockable::Helpers
+
+  @expected = attributes.extract_options!
   @attributes = attributes
+
+  unsupported_options %w(if unless)
+  valid_options %w(message on)
 
   match do |actual|
     @attributes.inject(true) do |result, attribute|
@@ -8,13 +13,8 @@ RSpec::Matchers.define(:validate_presence_of) do |*attributes|
         validator.kind == :presence
       end
 
-      validator && validator.options == @options
+      validator && validator.options.slice(*@expected.keys) == expected
     end
-  end
-
-  def message(message)
-    @options[:message] = message
-    self
   end
 
   failure_message_for_should do |actual|
@@ -26,6 +26,7 @@ RSpec::Matchers.define(:validate_presence_of) do |*attributes|
   end
 
   description do
-    "require #{@attributes.to_sentence} to be set"
+    with = " with #{@expected.inspect}" if @expected.any?
+    "validate presence of #{@attributes.to_sentence}#{with}"
   end
 end
