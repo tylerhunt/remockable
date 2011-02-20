@@ -44,29 +44,9 @@ describe "validates_confirmation_of" do
       it { should_not validate_confirmation_of(:email, :on => :update) }
     end
 
-    context "with unsupported option :if" do
-      it "raises an error" do
-        expect {
-          validate_confirmation_of(:email, :if => :allow_validation)
-        }.to raise_error(ArgumentError, /unsupported.*:if/i)
-      end
-    end
-
-    context "with unsupported option :unless" do
-      it "raises an error" do
-        expect {
-          validate_confirmation_of(:email, :unless => :allow_validation)
-        }.to raise_error(ArgumentError, /unsupported.*:unless/i)
-      end
-    end
-
-    context "with an unknown option" do
-      it "raises an error" do
-        expect {
-          validate_confirmation_of(:email, :xxx => true)
-        }.to raise_error(ArgumentError, /unknown.*:xxx/i)
-      end
-    end
+    has_unsupported_option(:validate_confirmation_of, :if => :allow_validation)
+    has_unsupported_option(:validate_confirmation_of, :unless => :allow_validation)
+    has_unknown_option(:validate_confirmation_of, :xxx => true)
   end
 
   context "description" do

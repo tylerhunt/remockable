@@ -114,37 +114,10 @@ describe "validates_length_of" do
       it { should_not validate_length_of(:name, :wrong_length => 'invalid') }
     end
 
-    context "with unsupported option :if" do
-      it "raises an error" do
-        expect {
-          validate_length_of(:name, :if => :allow_validation)
-        }.to raise_error(ArgumentError, /unsupported.*:if/i)
-      end
-    end
-
-    context "with unsupported option :unless" do
-      it "raises an error" do
-        expect {
-          validate_length_of(:name, :unless => :allow_validation)
-        }.to raise_error(ArgumentError, /unsupported.*:unless/i)
-      end
-    end
-
-    context "with unsupported option :tokenizer" do
-      it "raises an error" do
-        expect {
-          validate_length_of(:name, :tokenizer => :allow_validation)
-        }.to raise_error(ArgumentError, /unsupported.*:tokenizer/i)
-      end
-    end
-
-    context "with an unknown option" do
-      it "raises an error" do
-        expect {
-          validate_length_of(:name, :xxx => true)
-        }.to raise_error(ArgumentError, /unknown.*:xxx/i)
-      end
-    end
+    has_unsupported_option(:validate_length_of, :if => :allow_validation)
+    has_unsupported_option(:validate_length_of, :unless => :allow_validation)
+    has_unsupported_option(:validate_length_of, :tokenizer => lambda { |string| string.scan(/\w+/) } )
+    has_unknown_option(:validate_length_of, :xxx => true)
   end
 
   context "description" do

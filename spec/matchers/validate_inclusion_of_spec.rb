@@ -58,29 +58,9 @@ describe "validates_inclusion_of" do
       it { should_not validate_inclusion_of(:admin, :in => [true, false], :message => 'invalid') }
     end
 
-    context "with unsupported option :if" do
-      it "raises an error" do
-        expect {
-          validate_inclusion_of(:admin, :if => :allow_validation)
-        }.to raise_error(ArgumentError, /unsupported.*:if/i)
-      end
-    end
-
-    context "with unsupported option :unless" do
-      it "raises an error" do
-        expect {
-          validate_inclusion_of(:admin, :unless => :allow_validation)
-        }.to raise_error(ArgumentError, /unsupported.*:unless/i)
-      end
-    end
-
-    context "with an unknown option" do
-      it "raises an error" do
-        expect {
-          validate_inclusion_of(:admin, :xxx => true)
-        }.to raise_error(ArgumentError, /unknown.*:xxx/i)
-      end
-    end
+    has_unsupported_option(:validate_inclusion_of, :if => :allow_validation)
+    has_unsupported_option(:validate_inclusion_of, :unless => :allow_validation)
+    has_unknown_option(:validate_inclusion_of, :xxx => true)
   end
 
   context "description" do
