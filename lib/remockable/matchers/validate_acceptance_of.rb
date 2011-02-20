@@ -6,7 +6,7 @@ RSpec::Matchers.define(:validate_acceptance_of) do |*attributes|
   @attributes = attributes
 
   unsupported_options %w(if unless)
-  valid_options %w(message on allow_nil accept)
+  valid_options %w(allow_nil accept message on)
 
   match do |actual|
     validate_attributes do |validator|

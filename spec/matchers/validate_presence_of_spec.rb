@@ -47,7 +47,7 @@ describe "validates_presence_of" do
     context "with unsupported option :if" do
       it "raises an error" do
         expect {
-          validate_length_of(:name, :if => :allow_validation)
+          validate_presence_of(:name, :if => :allow_validation)
         }.to raise_error(ArgumentError, /unsupported.*:if/i)
       end
     end
@@ -55,7 +55,7 @@ describe "validates_presence_of" do
     context "with unsupported option :unless" do
       it "raises an error" do
         expect {
-          validate_length_of(:name, :unless => :allow_validation)
+          validate_presence_of(:name, :unless => :allow_validation)
         }.to raise_error(ArgumentError, /unsupported.*:unless/i)
       end
     end
@@ -63,7 +63,7 @@ describe "validates_presence_of" do
     context "with an unknown option" do
       it "raises an error" do
         expect {
-          validate_length_of(:name, :xxx => true)
+          validate_presence_of(:name, :xxx => true)
         }.to raise_error(ArgumentError, /unknown.*:xxx/i)
       end
     end

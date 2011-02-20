@@ -66,9 +66,9 @@ describe "validates_length_of" do
     end
 
     context "with option :message" do
-      let(:options) { { :is => 5, :message => 'is long enough!' } }
+      let(:options) { { :is => 5, :message => 'wrong length!' } }
 
-      it { should validate_length_of(:name, :message => 'is long enough!') }
+      it { should validate_length_of(:name, :message => 'wrong length!') }
       it { should_not validate_length_of(:name, :message => 'invalid') }
     end
 
