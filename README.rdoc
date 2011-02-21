@@ -1,0 +1,28 @@
+= Remockable
+
+A collection of RSpec matchers to simplify your web app specs.
+
+
+== Background
+
+The goal of this project is to provide a modern replacement to the now
+unmaintained Remarkable project. Remarkable was a great asset when Rails 2.3
+was current, but now that Rails 3.0 has become mainstream, a gap has been left
+by still unreleased Remarkable 4.0.
+
+In looking at the code for Remarkable to determine the feasibility of continuing
+work on Remarkable itself, it seems clear that the scope of that project has
+outgrown its usefulness for most users. It was with this conclusion in mind that
+Remockable was born. It's an attempt to start with a clean slate but maintain
+the original goal of Remarkable in spirit.
+
+
+== Matchers
+
+In this first release of Remockable, there are matchers for all of the Active
+Model validations. More are on the way soon.
+
+
+== Copyright
+
+Copyright (c) 2010-2011 Tyler Hunt. See LICENSE for details.
