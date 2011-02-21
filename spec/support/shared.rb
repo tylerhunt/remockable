@@ -15,11 +15,12 @@ shared_examples_for 'a validation matcher' do
 
   subject { model.new }
 
-  def self.with_option(option_name, positive, negative)
+  def self.with_option(option_name, positive, negative, exclusive=false)
     context "with option #{option_name.inspect}" do
       let(:options) do
         option = { option_name => positive }
-        default_options.is_a?(Hash) ? default_options.merge(option) : option
+        merge_with_default = !exclusive && default_options.is_a?(Hash)
+        merge_with_default ? default_options.merge(option) : option
       end
 
       it 'matches if the options match' do
@@ -30,6 +31,10 @@ shared_examples_for 'a validation matcher' do
         should_not send(matcher_name, *attributes, option_name => negative)
       end
     end
+  end
+
+  def self.with_option!(option_name, positive, negative)
+    with_option(option_name, positive, negative, true)
   end
 
   def self.with_unsupported_option(option_name, value=nil)
