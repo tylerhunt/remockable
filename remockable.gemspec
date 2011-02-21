@@ -1,11 +1,11 @@
 Gem::Specification.new do |gem|
   gem.name = 'remockable'
   gem.version = '0.0.1'
-  gem.summary = 'An API-compatible rewrite of Remarkable.'
+  gem.summary = 'A collection of RSpec matchers to simplify your web app specs.'
   gem.homepage = %q{http://github.com/tylerhunt/remockable}
   gem.authors = ['Tyler Hunt']
 
-  gem.files = Dir['LICENSE', 'lib/**/*']
+  gem.files = Dir['README', 'LICENSE', 'lib/**/*']
 
   gem.add_dependency 'activemodel', '~> 3.0.0'
   gem.add_dependency 'activesupport', '~> 3.0.0'
