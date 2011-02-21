@@ -1,16 +1,11 @@
 shared_examples_for 'a validation matcher' do
-  let(:attributes) { single_attribute }
-  let(:default_options) { {} }
+  let(:attributes) { :one }
   let(:options) { default_options }
   let(:matcher_name) { self.class.parent.parent.description }
 
   let(:model) do
     build_class(:User) do
       include ActiveModel::Validations
-
-      attr_accessor :name, :email, :password
-      attr_accessor :admin, :manager
-      attr_accessor :terms, :eula
     end
   end
 
@@ -27,14 +22,19 @@ shared_examples_for 'a validation matcher' do
         default_options.is_a?(Hash) ? default_options.merge(option) : option
       end
 
-      it { should send(matcher_name, *attributes, option_name => positive) }
-      it { should_not send(matcher_name, *attributes, option_name => negative) }
+      it 'matches if the options match' do
+        should send(matcher_name, *attributes, option_name => positive)
+      end
+
+      it "doesn't match if the options don't match" do
+        should_not send(matcher_name, *attributes, option_name => negative)
+      end
     end
   end
 
   def self.with_unsupported_option(option_name, value=nil)
     context "with unsupported option #{option_name.inspect}" do
-      it "raises an error" do
+      it 'raises an error' do
         expect {
           send(matcher_name, option_name => value)
         }.to raise_error(ArgumentError, /unsupported.*:#{option_name}/i)
@@ -71,18 +71,29 @@ shared_examples_for 'a validation matcher' do
   end
 
   context "with a single attribute" do
-    it { should send(matcher_name, single_attribute) }
-    it { should_not send(matcher_name, *(multiple_attributes - Array(attributes))) }
+    it 'matches if the validator has been defined' do
+      should send(matcher_name, :one)
+    end
+
+    it "doesn't match if the validator hasn't been defined" do
+      should_not send(matcher_name, :two)
+    end
   end
 
   context "with multiple attributes" do
-    let(:attributes) { multiple_attributes }
+    let(:attributes) { [:one, :two] }
 
-    it { should send(matcher_name, *multiple_attributes) }
+    it 'matches if the validators have been defined' do
+      should send(matcher_name, :one, :two)
+    end
+
+    it "doesn't match if the validators haven't been defined" do
+      should_not send(matcher_name, :one, :two, :trhee)
+    end
   end
 
   context "with an unknown option" do
-    it "raises an error" do
+    it 'raises an error' do
       expect {
         send(matcher_name, :xxx => true)
       }.to raise_error(ArgumentError, /unknown.*:xxx/i)

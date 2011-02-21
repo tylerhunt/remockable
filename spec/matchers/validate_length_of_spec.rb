@@ -2,12 +2,9 @@ require 'spec_helper'
 
 describe :validate_length_of do
   let(:validator_name) { :length }
+  let(:default_options) { { :is => 5 } }
 
   it_behaves_like 'a validation matcher' do
-    let(:single_attribute) { :name }
-    let(:multiple_attributes) { [:name, :email] }
-    let(:default_options) { { :is => 5 } }
-
     with_option(:allow_blank, true, false)
     with_option(:allow_nil, true, false)
     with_option(:in, 1..10, 1..5)
