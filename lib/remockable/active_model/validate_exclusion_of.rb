@@ -1,12 +1,12 @@
-RSpec::Matchers.define(:validate_format_of) do |*attributes|
-  extend Remockable::Helpers
+RSpec::Matchers.define(:validate_exclusion_of) do |*attributes|
+  extend Remockable::ActiveModel::Helpers
 
-  @type = :format
+  @type = :exclusion
   @expected = attributes.extract_options!
   @attributes = attributes
 
   unsupported_options %w(if unless)
-  valid_options %w(allow_blank allow_nil message on with without)
+  valid_options %w(allow_nil allow_blank in message on)
 
   match do |actual|
     validate_attributes do |validator|

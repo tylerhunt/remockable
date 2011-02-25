@@ -1,12 +1,12 @@
-RSpec::Matchers.define(:validate_acceptance_of) do |*attributes|
-  extend Remockable::Helpers
+RSpec::Matchers.define(:validate_format_of) do |*attributes|
+  extend Remockable::ActiveModel::Helpers
 
-  @type = :acceptance
+  @type = :format
   @expected = attributes.extract_options!
   @attributes = attributes
 
   unsupported_options %w(if unless)
-  valid_options %w(allow_nil accept message on)
+  valid_options %w(allow_blank allow_nil message on with without)
 
   match do |actual|
     validate_attributes do |validator|

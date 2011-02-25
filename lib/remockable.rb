@@ -1,2 +1,1 @@
-require 'remockable/helpers'
-require 'remockable/matchers'
+require 'remockable/active_model'

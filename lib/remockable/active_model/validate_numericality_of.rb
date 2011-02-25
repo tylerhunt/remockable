@@ -1,12 +1,12 @@
-RSpec::Matchers.define(:validate_presence_of) do |*attributes|
-  extend Remockable::Helpers
+RSpec::Matchers.define(:validate_numericality_of) do |*attributes|
+  extend Remockable::ActiveModel::Helpers
 
-  @type = :presence
+  @type = :numericality
   @expected = attributes.extract_options!
   @attributes = attributes
 
   unsupported_options %w(if unless)
-  valid_options %w(message on)
+  valid_options %w(allow_nil equal_to even greater_than greater_than_or_equal_to less_than less_than_or_equal_to message odd on only_integer)
 
   match do |actual|
     validate_attributes do |validator|

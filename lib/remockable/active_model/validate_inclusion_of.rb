@@ -1,7 +1,7 @@
-RSpec::Matchers.define(:validate_exclusion_of) do |*attributes|
-  extend Remockable::Helpers
+RSpec::Matchers.define(:validate_inclusion_of) do |*attributes|
+  extend Remockable::ActiveModel::Helpers
 
-  @type = :exclusion
+  @type = :inclusion
   @expected = attributes.extract_options!
   @attributes = attributes
 
