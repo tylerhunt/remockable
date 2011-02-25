@@ -1,8 +1,3 @@
-require 'rspec/core'
-require 'active_support/core_ext/array/extract_options'
-require 'active_support/core_ext/hash/slice'
-require 'active_support/core_ext/object/try'
-
 require 'remockable/active_model/helpers'
 require 'remockable/active_model/validate_acceptance_of'
 require 'remockable/active_model/validate_confirmation_of'

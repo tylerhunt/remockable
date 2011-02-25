@@ -1,4 +1,5 @@
 require 'active_model'
+require 'active_record'
 
 $:.unshift(File.expand_path('../lib', File.dirname(__FILE__)))
 require 'remockable'
