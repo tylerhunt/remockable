@@ -26,8 +26,8 @@ describe :have_index do
       end
     end
 
-    context "with a single column" do
-      it "matches if the index exists" do
+    context 'with a single column' do
+      it 'matches if the index exists' do
         ActiveRecord::Base.connection.add_index(:users, :one)
         model.should have_index(:one)
       end
@@ -37,8 +37,8 @@ describe :have_index do
       end
     end
 
-    context "with multiple columns" do
-      it "matches if the index exists" do
+    context 'with multiple columns' do
+      it 'matches if the index exists' do
         ActiveRecord::Base.connection.add_index(:users, [:one, :two])
         model.should have_index([:one, :two])
       end
@@ -48,8 +48,8 @@ describe :have_index do
       end
     end
 
-    context "with option :unique" do
-      it "matches if the index exists" do
+    context 'with option :unique' do
+      it 'matches if the index exists' do
         ActiveRecord::Base.connection.add_index(:users, :one, :unique => true)
         model.should have_index(:one, :unique => true)
       end
@@ -64,8 +64,8 @@ describe :have_index do
       end
     end
 
-    context "with option :name" do
-      it "matches if the index exists" do
+    context 'with option :name' do
+      it 'matches if the index exists' do
         ActiveRecord::Base.connection.add_index(:users, :one, :name => :oneness)
         model.should have_index(:one, :name => :oneness)
       end
@@ -75,8 +75,8 @@ describe :have_index do
       end
     end
 
-    context "with option :name and without :one" do
-      it "matches if the index exists" do
+    context 'with option :name and without :one' do
+      it 'matches if the index exists' do
         ActiveRecord::Base.connection.add_index(:users, :one, :name => :oneness)
         model.should have_index(:name => :oneness)
       end

@@ -24,8 +24,8 @@ describe :have_column do
       end
     end
 
-    context "with a column" do
-      it "matches if the column exists" do
+    context 'with a column' do
+      it 'matches if the column exists' do
         ActiveRecord::Base.connection.add_column(:users, :one, :string)
         model.should have_column(:one)
       end
@@ -35,8 +35,8 @@ describe :have_column do
       end
     end
 
-    context "with option :default" do
-      it "matches if the column exists" do
+    context 'with option :default' do
+      it 'matches if the column exists' do
         ActiveRecord::Base.connection.add_column(:users, :one, :integer, :default => 1)
         model.should have_column(:one, :default => 1)
       end
@@ -47,8 +47,8 @@ describe :have_column do
       end
     end
 
-    context "with option :limit" do
-      it "matches if the column exists" do
+    context 'with option :limit' do
+      it 'matches if the column exists' do
         ActiveRecord::Base.connection.add_column(:users, :one, :string, :limit => 10)
         model.should have_column(:one, :limit => 10)
       end
@@ -59,8 +59,8 @@ describe :have_column do
       end
     end
 
-    context "with option :null" do
-      it "matches if the column exists" do
+    context 'with option :null' do
+      it 'matches if the column exists' do
         ActiveRecord::Base.connection.add_column(:users, :one, :integer, :null => false, :default => 1)
         model.should have_column(:one, :null => false)
       end
@@ -71,8 +71,8 @@ describe :have_column do
       end
     end
 
-    context "with option :precision" do
-      it "matches if the column exists" do
+    context 'with option :precision' do
+      it 'matches if the column exists' do
         ActiveRecord::Base.connection.add_column(:users, :one, :decimal, :precision => 8)
         model.should have_column(:one, :precision => 8)
       end
@@ -83,8 +83,8 @@ describe :have_column do
       end
     end
 
-    context "with option :scale" do
-      it "matches if the column exists" do
+    context 'with option :scale' do
+      it 'matches if the column exists' do
         ActiveRecord::Base.connection.add_column(:users, :one, :decimal, :precision => 8, :scale => 2)
         model.should have_column(:one, :scale => 2)
       end
@@ -95,8 +95,8 @@ describe :have_column do
       end
     end
 
-    context "with option :type" do
-      it "matches if the column exists" do
+    context 'with option :type' do
+      it 'matches if the column exists' do
         ActiveRecord::Base.connection.add_column(:users, :one, :integer)
         model.should have_column(:one, :type => :integer)
       end
