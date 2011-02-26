@@ -27,83 +27,83 @@ describe :have_column do
     context "with a column" do
       it "matches if the column exists" do
         ActiveRecord::Base.connection.add_column(:users, :one, :string)
-        model.should have_column(:one).should be_true
+        model.should have_column(:one)
       end
 
       it "doesn't match if the column doesn't exist" do
-        model.should_not have_column(:one).should be_true
+        model.should_not have_column(:one)
       end
     end
 
     context "with option :default" do
       it "matches if the column exists" do
         ActiveRecord::Base.connection.add_column(:users, :one, :integer, :default => 1)
-        model.should have_column(:one, :default => 1).should be_true
+        model.should have_column(:one, :default => 1)
       end
 
       it "doesn't match if the column doesn't have the same default" do
         ActiveRecord::Base.connection.add_column(:users, :one, :integer, :default => 2)
-        model.should_not have_column(:one, :default => 1).should be_true
+        model.should_not have_column(:one, :default => 1)
       end
     end
 
     context "with option :limit" do
       it "matches if the column exists" do
         ActiveRecord::Base.connection.add_column(:users, :one, :string, :limit => 10)
-        model.should have_column(:one, :limit => 10).should be_true
+        model.should have_column(:one, :limit => 10)
       end
 
       it "doesn't match if the column doesn't have the same limit" do
         ActiveRecord::Base.connection.add_column(:users, :one, :string, :limit => 5)
-        model.should_not have_column(:one, :limit => 10).should be_true
+        model.should_not have_column(:one, :limit => 10)
       end
     end
 
     context "with option :null" do
       it "matches if the column exists" do
         ActiveRecord::Base.connection.add_column(:users, :one, :integer, :null => false, :default => 1)
-        model.should have_column(:one, :null => false).should be_true
+        model.should have_column(:one, :null => false)
       end
 
       it "doesn't match if the column doesn't have the same null" do
         ActiveRecord::Base.connection.add_column(:users, :one, :integer)
-        model.should_not have_column(:one, :null => false).should be_true
+        model.should_not have_column(:one, :null => false)
       end
     end
 
     context "with option :precision" do
       it "matches if the column exists" do
         ActiveRecord::Base.connection.add_column(:users, :one, :decimal, :precision => 8)
-        model.should have_column(:one, :precision => 8).should be_true
+        model.should have_column(:one, :precision => 8)
       end
 
       it "doesn't match if the column doesn't have the same null" do
         ActiveRecord::Base.connection.add_column(:users, :one, :decimal, :precision => 8)
-        model.should_not have_column(:one, :precision => 5).should be_true
+        model.should_not have_column(:one, :precision => 5)
       end
     end
 
     context "with option :scale" do
       it "matches if the column exists" do
         ActiveRecord::Base.connection.add_column(:users, :one, :decimal, :precision => 8, :scale => 2)
-        model.should have_column(:one, :scale => 2).should be_true
+        model.should have_column(:one, :scale => 2)
       end
 
       it "doesn't match if the column doesn't have the same null" do
         ActiveRecord::Base.connection.add_column(:users, :one, :decimal, :precision => 8, :scale => 2)
-        model.should_not have_column(:one, :scale => 3).should be_true
+        model.should_not have_column(:one, :scale => 3)
       end
     end
 
     context "with option :type" do
       it "matches if the column exists" do
         ActiveRecord::Base.connection.add_column(:users, :one, :integer)
-        model.should have_column(:one, :type => :integer).should be_true
+        model.should have_column(:one, :type => :integer)
       end
 
       it "doesn't match if the column doesn't have the same type" do
         ActiveRecord::Base.connection.add_column(:users, :one, :string)
-        model.should_not have_column(:one, :type => :integer).should be_true
+        model.should_not have_column(:one, :type => :integer)
       end
     end
   end
