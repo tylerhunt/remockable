@@ -1,6 +1,6 @@
 Gem::Specification.new do |gem|
   gem.name = 'remockable'
-  gem.version = '0.0.1'
+  gem.version = '0.0.2'
   gem.summary = 'A collection of RSpec matchers to simplify your web app specs.'
   gem.homepage = %q{http://github.com/tylerhunt/remockable}
   gem.authors = ['Tyler Hunt']
