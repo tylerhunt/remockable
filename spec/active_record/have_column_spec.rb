@@ -11,7 +11,7 @@ describe :have_column do
       end
     end
 
-    subject { model }
+    subject { model.new }
 
     context 'description' do
       let(:matcher) { send(matcher_name, *options) }

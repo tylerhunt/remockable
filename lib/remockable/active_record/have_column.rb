@@ -7,7 +7,7 @@ RSpec::Matchers.define(:have_column) do |*attributes|
   valid_options %w(default limit null precision scale type)
 
   match do |actual|
-    if column = subject.columns.detect { |column| column.name == @column.to_s }
+    if column = subject.class.columns.detect { |column| column.name == @column.to_s }
       @expected.all? { |key, value| column.send(key).should == value }
     end
   end

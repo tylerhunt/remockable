@@ -9,7 +9,7 @@ RSpec::Matchers.define(:have_index) do |*attributes|
   match do |actual|
     name = @expected[:name]
     unique = @expected[:unique]
-    indexes = ActiveRecord::Base.connection.indexes(subject.table_name)
+    indexes = ActiveRecord::Base.connection.indexes(subject.class.table_name)
 
     column_names = @columns.flatten.collect(&:to_s)
 
