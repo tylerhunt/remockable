@@ -13,7 +13,7 @@ module Remockable
 
       def validate_attributes
         @attributes.inject(true) do |result, attribute|
-          yield validator_for(attribute)
+          result & yield(validator_for(attribute))
         end
       end
     end
