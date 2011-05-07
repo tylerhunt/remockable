@@ -93,7 +93,7 @@ shared_examples_for 'a validation matcher' do
     end
 
     it "doesn't match if the validators haven't been defined" do
-      should_not send(matcher_name, :one, :two, :trhee)
+      should_not send(matcher_name, :one, :two, :three)
     end
   end
 
