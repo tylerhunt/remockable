@@ -19,9 +19,9 @@ the original goal of Remarkable in spirit.
 
 == Matchers
 
-Remockable currently includes support for all of the Active Model validations,
-and also supports the have_column, have_index, and have_scope Active Record
-matchers.
+Remockable currently includes support for all of the Active Model validation
+and allow_mass_assignment_of matchers, and also supports the have_column,
+have_index, and have_scope Active Record matchers.
 
 More are on the way soon.
 
@@ -43,4 +43,4 @@ when your specs do:
 
 == Copyright
 
-Copyright (c) 2010-2011 Tyler Hunt. See LICENSE for details.
+Copyright © 2010-2011 Tyler Hunt. See LICENSE for details.
