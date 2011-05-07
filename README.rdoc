@@ -1,6 +1,6 @@
 = Remockable
 
-A collection of RSpec matchers to simplify your web app specs.
+A collection of RSpec 2 matchers to simplify your web app specs.
 
 
 == Background
@@ -24,6 +24,21 @@ and also supports the have_column, have_index, and have_scope Active Record
 matchers.
 
 More are on the way soon.
+
+
+== Installation
+
+Add the `remockable` gem to your `Gemfile`:
+
+    gem 'remarkable'
+
+Then run `bundle install` to install the gem.
+
+You'll also want to make sure the library is required by RSpec, so add the
+following to your `spec_helper.rb` or someone else where it will get loaded
+when your specs do:
+
+  require 'remarkable'
 
 
 == Copyright
