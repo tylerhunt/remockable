@@ -7,7 +7,7 @@ Gem::Specification.new do |gem|
   gem.homepage = %q{http://github.com/tylerhunt/remockable}
   gem.authors = ['Tyler Hunt']
 
-  gem.files = Dir['README', 'LICENSE', 'lib/**/*']
+  gem.files = Dir['README.markdown', 'LICENSE', 'lib/**/*']
 
   gem.add_dependency 'activemodel', '~> 3.0.0'
   gem.add_dependency 'activerecord', '~> 3.0.0'
