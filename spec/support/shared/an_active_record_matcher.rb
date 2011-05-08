@@ -12,7 +12,7 @@ shared_examples_for 'an Active Record matcher' do
     context "with option #{option_name.inspect}" do
       let(:options) { [:company, option_name => positive] }
 
-      before(:each) { model.belongs_to(*options) }
+      before(:each) { model.send(macro, *options) }
 
       it 'matches if the options match' do
         should send(matcher_name, :company, option_name => positive)
