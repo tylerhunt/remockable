@@ -36,6 +36,11 @@ describe :belong_to do
       it "doesn't match if the association doesn't exist" do
         model.should_not belong_to(*options)
       end
+
+      it "doesn't match if the association isn't the right type" do
+        model.has_many(*options)
+        model.should_not belong_to(*options)
+      end
     end
 
     with_option(:class_name, 'Company', 'Organization')
