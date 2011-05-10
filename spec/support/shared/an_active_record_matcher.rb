@@ -1,13 +1,6 @@
 shared_examples_for 'an Active Record matcher' do
   let(:matcher_name) { self.class.parent.parent.description }
 
-  before(:all) do
-    ActiveRecord::Base.establish_connection(
-      :adapter => 'sqlite3',
-      :database => ':memory:'
-    )
-  end
-
   def self.with_option(option_name, positive, negative)
     context "with option #{option_name.inspect}" do
       let(:options) { [:company, option_name => positive] }
