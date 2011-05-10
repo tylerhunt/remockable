@@ -9,4 +9,5 @@ require 'remockable/active_record/have_column'
 require 'remockable/active_record/have_index'
 require 'remockable/active_record/have_scope'
 
+require 'remockable/active_record/validate_associated'
 require 'remockable/active_record/validate_uniqueness_of'
