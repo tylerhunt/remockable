@@ -59,7 +59,7 @@ You'll also want to make sure the library is required by RSpec, so add the
 following to your `spec_helper.rb` or someone else where it will get loaded
 when your specs do:
 
-  require 'remockable'
+    require 'remockable'
 
 
 ## Copyright
