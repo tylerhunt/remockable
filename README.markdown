@@ -17,13 +17,34 @@ Remockable was born. It's an attempt to start with a clean slate but maintain
 the original goal of Remarkable in spirit.
 
 
-## Matchers
+## Active Model Matchers
 
-Remockable currently includes support for all of the Active Model validation
-and allow_mass_assignment_of matchers, and also supports the association,
-have_column, have_index, and have_scope Active Record matchers.
+The following Active Model matchers are supported:
 
-More are on the way soon.
+  * allow_mass_assignment_of
+  * validate_acceptance_of
+  * validate_confirmation_of
+  * validate_exclusion_of
+  * validate_format_of
+  * validate_inclusion_of
+  * validate_length_of
+  * validate_numericality_of
+  * validate_presence_of
+
+
+## Active Record Matchers
+
+The following Active Record matchers are supported:
+
+  * have_column
+  * have_index
+  * have_scope
+  * belongs_to
+  * have_one
+  * have_many
+  * have_and_belong_to_many
+  * validate_associated
+  * validate_uniqueness_of
 
 
 ## Installation
