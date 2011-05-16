@@ -7,6 +7,8 @@ require 'remockable/active_record/have_one'
 
 require 'remockable/active_record/have_column'
 require 'remockable/active_record/have_index'
+
+require 'remockable/active_record/have_default_scope'
 require 'remockable/active_record/have_scope'
 
 require 'remockable/active_record/validate_associated'
