@@ -8,21 +8,21 @@ RSpec::Matchers.define(:have_scope) do |*expected|
 
   match do |actual|
     if subject.class.respond_to?(@name)
-      @scope = if @expected.key?(:with)
+      scope = if @expected.key?(:with)
         with = Array(@expected[:with])
         subject.class.send(@name, *with)
       else
         subject.class.send(@name)
       end
 
-      if @scope.is_a?(ActiveRecord::Relation)
+      if scope.is_a?(ActiveRecord::Relation)
         if @relation
-          query_matches = @scope.arel.to_sql == @relation.arel.to_sql
-          eager_load_matches = @scope.eager_load_values == @relation.eager_load_values
-          includes_matches = @scope.includes_values == @relation.includes_values
-          lock_matches = @scope.lock_value == @relation.lock_value
-          preload_matches = @scope.preload_values == @relation.preload_values
-          readonly_matches = @scope.readonly_value == @relation.readonly_value
+          query_matches = scope.arel.to_sql == @relation.arel.to_sql
+          eager_load_matches = scope.eager_load_values == @relation.eager_load_values
+          includes_matches = scope.includes_values == @relation.includes_values
+          lock_matches = scope.lock_value == @relation.lock_value
+          preload_matches = scope.preload_values == @relation.preload_values
+          readonly_matches = scope.readonly_value == @relation.readonly_value
 
           query_matches && eager_load_matches && includes_matches && lock_matches && preload_matches && readonly_matches
         else

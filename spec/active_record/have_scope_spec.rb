@@ -36,7 +36,7 @@ describe :have_scope do
       end
     end
 
-    context 'with a eager_load value' do
+    context 'with an eager_load value' do
       it 'matches if the scope exists and the definition matches' do
         model.instance_eval { scope(:loaded, eager_load(:order)) }
         model.should have_scope(:loaded).eager_load(:order)
@@ -96,7 +96,7 @@ describe :have_scope do
       end
     end
 
-    context 'with a includes value' do
+    context 'with an includes value' do
       it 'matches if the scope exists and the definition matches' do
         model.instance_eval { scope(:joined, includes(:company)) }
         model.should have_scope(:joined).includes(:company)
@@ -144,7 +144,7 @@ describe :have_scope do
       end
     end
 
-    context 'with a offset value' do
+    context 'with an offset value' do
       it 'matches if the scope exists and the definition matches' do
         model.instance_eval { scope(:shifted, offset(10)) }
         model.should have_scope(:shifted).offset(10)
@@ -156,7 +156,7 @@ describe :have_scope do
       end
     end
 
-    context 'with a order value' do
+    context 'with an order value' do
       it 'matches if the scope exists and the definition matches' do
         model.instance_eval { scope(:ordered, order('one')) }
         model.should have_scope(:ordered).order('one')
@@ -211,8 +211,8 @@ describe :have_scope do
       end
 
       it "doesn't match if the definition doesn't match" do
-        model.instance_eval { scope(:ones, where('one')) }
-        model.should_not have_scope(:ones).where('id')
+        model.instance_eval { scope(:ones, select('one')) }
+        model.should_not have_scope(:ones).select('id')
       end
     end
 
