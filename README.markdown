@@ -39,7 +39,8 @@ The following Active Record matchers are supported:
   * have_column
   * have_index
   * have_scope
-  * belongs_to
+  * have_default_scope
+  * belong_to
   * have_one
   * have_many
   * have_and_belong_to_many
@@ -60,6 +61,12 @@ following to your `spec_helper.rb` or someone else where it will get loaded
 when your specs do:
 
     require 'remockable'
+
+
+## Compatibility
+
+Remockable is compatible with Rails 3.0, but it has also been tested against
+3.1.0.rc4 and appears to be working fine there, too.
 
 
 ## Copyright
