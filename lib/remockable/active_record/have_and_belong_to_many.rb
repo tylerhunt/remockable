@@ -9,7 +9,7 @@ RSpec::Matchers.define(:have_and_belong_to_many) do |*attributes|
 
   match do |actual|
     if association = subject.class.reflect_on_association(@association)
-      macro_matches = association.macro.should == :has_and_belongs_to_many
+      macro_matches = association.macro == :has_and_belongs_to_many
       options_match = association.options.slice(*expected.keys) == expected
       macro_matches && options_match
     end
