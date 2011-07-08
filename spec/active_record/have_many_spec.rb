@@ -36,6 +36,11 @@ describe :have_many do
       it "doesn't match if the association doesn't exist" do
         model.should_not have_many(*options)
       end
+
+      it "doesn't match if the association is of the wrong type" do
+        model.belongs_to(*options)
+        model.should_not have_many(*options)
+      end
     end
 
     with_option(:class_name, 'Post', 'Blog')
