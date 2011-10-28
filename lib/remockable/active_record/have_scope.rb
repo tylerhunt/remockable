@@ -33,27 +33,8 @@ RSpec::Matchers.define(:have_scope) do |*expected|
   end
 
   def method_missing(method, *args, &block)
-    unsupposed_query_methods = %(
-      create_with
-    )
-
-    query_methods = %w(
-      eager_load
-      from
-      group
-      having
-      includes
-      joins
-      limit
-      lock
-      offset
-      order
-      preload
-      readonly
-      reorder
-      select
-      where
-    )
+    unsupported_query_methods = %(create_with)
+    query_methods = %w(eager_load from group having includes joins limit lock offset order preload readonly reorder select where)
 
     if query_methods.include?(method.to_s)
       @relation ||= subject.class.scoped

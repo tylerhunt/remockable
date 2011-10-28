@@ -36,18 +36,6 @@ describe :have_default_scope do
       end
     end
 
-    context 'with an eager_load value' do
-      it 'matches if the scope exists and the definition matches' do
-        model.instance_eval { default_scope(eager_load(:order)) }
-        model.should have_default_scope.eager_load(:order)
-      end
-
-      it "doesn't match if the definition doesn't match" do
-        model.instance_eval { default_scope(eager_load(:order)) }
-        model.should_not have_default_scope.eager_load(:from)
-      end
-    end
-
     context 'with a from value' do
       it 'matches if the scope exists and the definition matches' do
         model.instance_eval { default_scope(from('users')) }
@@ -96,18 +84,6 @@ describe :have_default_scope do
       end
     end
 
-    context 'with an includes value' do
-      it 'matches if the scope exists and the definition matches' do
-        model.instance_eval { default_scope(includes(:company)) }
-        model.should have_default_scope.includes(:company)
-      end
-
-      it "doesn't match if the definition doesn't match" do
-        model.instance_eval { default_scope(includes(:company)) }
-        model.should_not have_default_scope.includes(:address)
-      end
-    end
-
     context 'with a joins value' do
       it 'matches if the scope exists and the definition matches' do
         model.instance_eval { default_scope(joins('INNER JOIN friends')) }
@@ -132,18 +108,6 @@ describe :have_default_scope do
       end
     end
 
-    context 'with a lock value' do
-      it 'matches if the scope exists and the definition matches' do
-        model.instance_eval { default_scope(lock(true)) }
-        model.should have_default_scope.lock(true)
-      end
-
-      it "doesn't match if the definition doesn't match" do
-        model.instance_eval { default_scope(lock(true)) }
-        model.should_not have_default_scope.lock(false)
-      end
-    end
-
     context 'with an offset value' do
       it 'matches if the scope exists and the definition matches' do
         model.instance_eval { default_scope(offset(10)) }
@@ -165,30 +129,6 @@ describe :have_default_scope do
       it "doesn't match if the definition doesn't match" do
         model.instance_eval { default_scope(order('one')) }
         model.should_not have_default_scope.order('id')
-      end
-    end
-
-    context 'with a preload value' do
-      it 'matches if the scope exists and the definition matches' do
-        model.instance_eval { default_scope(preload(:company)) }
-        model.should have_default_scope.preload(:company)
-      end
-
-      it "doesn't match if the definition doesn't match" do
-        model.instance_eval { default_scope(preload(:company)) }
-        model.should_not have_default_scope.preload(:address)
-      end
-    end
-
-    context 'with a readonly value' do
-      it 'matches if the scope exists and the definition matches' do
-        model.instance_eval { default_scope(readonly(false)) }
-        model.should have_default_scope.readonly(false)
-      end
-
-      it "doesn't match if the definition doesn't match" do
-        model.instance_eval { default_scope(readonly(false)) }
-        model.should_not have_default_scope.readonly(true)
       end
     end
 

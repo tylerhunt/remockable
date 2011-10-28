@@ -19,7 +19,9 @@ RSpec::Matchers.define(:have_default_scope) do |*expected|
           readonly_matches = scope.readonly_value == @relation.readonly_value
 
           query_matches && eager_load_matches && includes_matches && lock_matches && preload_matches && readonly_matches
-        elsif subject.class.respond_to?(:default_scoping)
+        elsif subject.class.respond_to?(:default_scopes) # Rails 3.1
+          subject.class.default_scopes.any?
+        elsif subject.class.respond_to?(:default_scoping) # Rails 3.0
           subject.class.default_scoping.any?
         end
       end
@@ -27,33 +29,11 @@ RSpec::Matchers.define(:have_default_scope) do |*expected|
   end
 
   def method_missing(method, *args, &block)
-    unsupposed_query_methods = %(
-      create_with
-    )
-
-    query_methods = %w(
-      eager_load
-      from
-      group
-      having
-      includes
-      joins
-      limit
-      lock
-      offset
-      order
-      preload
-      readonly
-      reorder
-      select
-      where
-    )
+    unsupported_query_methods = %(create_with eager_load includes lock preload readonly)
+    query_methods = %w(from group having joins limit offset order reorder select where)
 
     if query_methods.include?(method.to_s)
-      @relation ||= subject.class.send(:with_exclusive_scope) do
-        subject.class.scoped
-      end
-
+      @relation ||= subject.class.unscoped
       @relation = @relation.send(method, *args)
       self
     else
