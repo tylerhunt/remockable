@@ -1,12 +1,15 @@
 require 'spec_helper'
 
 describe :accept_nested_attributes_for do
-  let(:options) { [:posts, :allow_destroy => true] }
+  let(:macro) { :accepts_nested_attributes_for }
+  let(:options) { [:company, :allow_destroy => true] }
 
   it_behaves_like 'an Active Record matcher' do
+    let(:matcher_name) { :accept_nested_attributes_for }
+
     let(:model) do
       build_class(:User, ActiveRecord::Base) do
-        has_many :posts
+        belongs_to :company
       end
     end
 
@@ -25,7 +28,7 @@ describe :accept_nested_attributes_for do
     end
 
     context 'with no options' do
-      let(:options) { :posts }
+      let(:options) { :company }
 
       it 'matches if the model accepts the nested attributes' do
         model.accepts_nested_attributes_for(*options)
@@ -37,40 +40,10 @@ describe :accept_nested_attributes_for do
       end
     end
 
-    context 'with option :allow_destroy' do
-      it 'matches if the options match' do
-        model.accepts_nested_attributes_for(:posts, :allow_destroy => true)
-        model.should_not accept_nested_attributes_for(:loaded, :allow_destroy => true)
-      end
+    with_option(:allow_destroy, true, false)
+    with_option(:limit, 1, 2)
+    with_option(:update_only, true, false)
 
-      it "doesn't match if the options don't match" do
-        model.accepts_nested_attributes_for(:posts, :allow_destroy => false)
-        model.should_not accept_nested_attributes_for(:loaded, :allow_destroy => true)
-      end
-    end
-
-    context 'with option :limit' do
-      it 'matches if the options match' do
-        model.accepts_nested_attributes_for(:posts, :limit => 1)
-        model.should_not accept_nested_attributes_for(:loaded, :limit => 1)
-      end
-
-      it "doesn't match if the options don't match" do
-        model.accepts_nested_attributes_for(:posts, :limit => 2)
-        model.should_not accept_nested_attributes_for(:loaded, :limit => 1)
-      end
-    end
-
-    context 'with option :update_only' do
-      it 'matches if the options match' do
-        model.accepts_nested_attributes_for(:posts, :update_only => true)
-        model.should_not accept_nested_attributes_for(:loaded, :update_only => true)
-      end
-
-      it "doesn't match if the options don't match" do
-        model.accepts_nested_attributes_for(:posts, :update_only => false)
-        model.should_not accept_nested_attributes_for(:loaded, :update_only => true)
-      end
-    end
+    with_unsupported_option(:reject_if, :all_blank)
   end
 end
