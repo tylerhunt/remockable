@@ -26,7 +26,7 @@ describe :have_one do
     end
 
     context 'with no options' do
-      let(:options) { :company }
+      let(:options) { :address }
 
       it 'matches if the association exists' do
         model.has_one(*options)

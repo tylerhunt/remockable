@@ -26,7 +26,7 @@ describe :have_many do
     end
 
     context 'with no options' do
-      let(:options) { :company }
+      let(:options) { :posts }
 
       it 'matches if the association exists' do
         model.has_many(*options)
