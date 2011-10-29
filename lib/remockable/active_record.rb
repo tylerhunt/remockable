@@ -13,3 +13,5 @@ require 'remockable/active_record/have_scope'
 
 require 'remockable/active_record/validate_associated'
 require 'remockable/active_record/validate_uniqueness_of'
+
+require 'remockable/active_record/accept_nested_attributes_for'
