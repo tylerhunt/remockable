@@ -1,10 +1,12 @@
 RSpec::Matchers.define(:allow_mass_assignment_of) do |*attributes|
+  @options = attributes.extract_options!
+  @role = @options[:as] || :default
   @attributes = attributes
   @authorizer = nil
 
   def authorizer(actual)
     @authorizer ||= actual.class.active_authorizer
-    @authorizer = @authorizer[:default] if @authorizer.is_a?(Hash)
+    @authorizer = @authorizer[@role] if @authorizer.is_a?(Hash)
     @authorizer
   end
 

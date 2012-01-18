@@ -51,6 +51,18 @@ describe :allow_mass_assignment_of do
       end
     end
 
+    context "with a role" do
+      let(:attributes) { [:one, as: :admin] }
+
+      it 'matches if the attributes are accessible' do
+        should allow_mass_assignment_of(:one, as: :admin)
+      end
+
+      it "doesn't match if the attributes are protected" do
+        should_not allow_mass_assignment_of(:two, as: :admin)
+      end
+    end
+
     context "with multiple attributes" do
       let(:attributes) { [:one, :two] }
 
@@ -78,6 +90,18 @@ describe :allow_mass_assignment_of do
 
       it "doesn't match if the attributes are protected" do
         should_not allow_mass_assignment_of(:three)
+      end
+    end
+
+    context "with a role" do
+      let(:attributes) { [:three, as: :admin] }
+
+      it 'matches if the attributes are accessible' do
+        should allow_mass_assignment_of(:one, as: :admin)
+      end
+
+      it "doesn't match if the attributes are protected" do
+        should_not allow_mass_assignment_of(:three, as: :admin)
       end
     end
 
