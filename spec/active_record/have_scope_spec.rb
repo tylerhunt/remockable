@@ -50,49 +50,37 @@ describe :have_scope do
 
     context 'with a from value' do
       it 'matches if the scope exists and the definition matches' do
-        model.instance_eval { scope(:haved, from('users')) }
-        model.should have_scope(:haved).from('users')
+        model.instance_eval { scope(:used, from('users')) }
+        model.should have_scope(:used).from('users')
       end
 
       it "doesn't match if the definition doesn't match" do
-        model.instance_eval { scope(:haved, from('users')) }
-        model.should_not have_scope(:haved).from('friends')
+        model.instance_eval { scope(:used, from('users')) }
+        model.should_not have_scope(:used).from('friends')
       end
     end
 
     context 'with a group value' do
       it 'matches if the scope exists and the definition matches' do
-        model.instance_eval { scope(:haved, group('one')) }
-        model.should have_scope(:haved).group('one')
+        model.instance_eval { scope(:grouped, group('one')) }
+        model.should have_scope(:grouped).group('one')
       end
 
       it "doesn't match if the definition doesn't match" do
-        model.instance_eval { scope(:haved, group('one')) }
-        model.should_not have_scope(:haved).group('two')
+        model.instance_eval { scope(:grouped, group('one')) }
+        model.should_not have_scope(:grouped).group('two')
       end
     end
 
     context 'with a having value' do
       it 'matches if the scope exists and the definition matches' do
-        model.instance_eval { scope(:haved, having('COUNT(*) > 1')) }
-        model.should have_scope(:haved).having('COUNT(*) > 1')
+        model.instance_eval { scope(:had, having('COUNT(*) > 1')) }
+        model.should have_scope(:had).having('COUNT(*) > 1')
       end
 
       it "doesn't match if the definition doesn't match" do
-        model.instance_eval { scope(:haved, having('COUNT(*) > 1')) }
-        model.should_not have_scope(:haved).having('COUNT(*) > 2')
-      end
-    end
-
-    context 'with a having value' do
-      it 'matches if the scope exists and the definition matches' do
-        model.instance_eval { scope(:has, having('COUNT(*) > 1')) }
-        model.should have_scope(:has).having('COUNT(*) > 1')
-      end
-
-      it "doesn't match if the definition doesn't match" do
-        model.instance_eval { scope(:has, having('COUNT(*) > 1')) }
-        model.should_not have_scope(:has).having('COUNT(*) > 2')
+        model.instance_eval { scope(:had, having('COUNT(*) > 1')) }
+        model.should_not have_scope(:had).having('COUNT(*) > 2')
       end
     end
 
