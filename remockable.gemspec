@@ -14,6 +14,6 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'activesupport', '~> 3.0'
   gem.add_dependency 'rspec-core', '~> 2.0'
   gem.add_dependency 'rspec-expectations', '~> 2.0'
-  gem.add_development_dependency 'rspec-mocks', '~> 2.0'
+  gem.add_dependency 'rspec-mocks', '~> 2.0'
   gem.add_development_dependency 'sqlite3', '~> 1.3.4'
 end
