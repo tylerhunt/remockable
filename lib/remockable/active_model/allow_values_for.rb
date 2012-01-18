@@ -3,22 +3,18 @@ RSpec::Matchers.define(:allow_values_for) do |*attributes_and_values|
   @values = attributes_and_values
 
   match_for_should do |actual|
-    instance = subject.class.new
-
     @values.all? do |value|
-      instance.stub(@attribute).and_return(value)
-      instance.valid?
-      instance.errors[@attribute].empty?
+      subject.stub(@attribute).and_return(value)
+      subject.valid?
+      subject.errors[@attribute].empty?
     end
   end
 
   match_for_should_not do |actual|
-    instance = subject.class.new
-
     @values.none? do |value|
-      instance.stub(@attribute).and_return(value)
-      instance.valid?
-      instance.errors[@attribute].empty?
+      subject.stub(@attribute).and_return(value)
+      subject.valid?
+      subject.errors[@attribute].empty?
     end
   end
 
