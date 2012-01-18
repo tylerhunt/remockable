@@ -2,6 +2,7 @@ RSpec::Matchers.define(:have_default_scope) do |*expected|
   extend Remockable::ActiveRecord::Helpers
 
   @expected = expected.extract_options!
+  @relation = nil
 
   valid_options %w()
 

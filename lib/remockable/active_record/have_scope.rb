@@ -3,6 +3,7 @@ RSpec::Matchers.define(:have_scope) do |*expected|
 
   @expected = expected.extract_options!
   @name = expected.first
+  @relation = nil
 
   valid_options %w(with)
 

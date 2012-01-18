@@ -1,5 +1,6 @@
 RSpec::Matchers.define(:allow_mass_assignment_of) do |*attributes|
   @attributes = attributes
+  @authorizer = nil
 
   def authorizer(actual)
     @authorizer ||= actual.class.active_authorizer
