@@ -66,7 +66,7 @@ when your specs do:
 ## Compatibility
 
 Remockable is compatible with Rails 3.0, but it has also been tested against
-3.1.0.rc4 and appears to be working fine there, too.
+3.1 and appears to be working fine there, too.
 
 
 ## Copyright
