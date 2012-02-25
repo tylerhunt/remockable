@@ -6,10 +6,10 @@ describe :have_index do
   it_behaves_like 'an Active Record matcher' do
     let(:model) { build_class(:User, ActiveRecord::Base) }
 
-    before(:each) do
+    before do
       create_table(:users) do |table|
-        table.string :one
-        table.string :two
+        table.string(:one)
+        table.string(:two)
       end
     end
 
@@ -32,7 +32,7 @@ describe :have_index do
         model.should have_index(:one)
       end
 
-      it "doesn't match if the index doesn't exist" do
+      it 'does not match if the index does not exist' do
         model.should_not have_index(:one)
       end
     end
@@ -43,7 +43,7 @@ describe :have_index do
         model.should have_index([:one, :two])
       end
 
-      it "doesn't match if the index doesn't exist" do
+      it 'does not match if the index does not exist' do
         model.should_not have_index([:one, :two])
       end
     end
@@ -54,12 +54,12 @@ describe :have_index do
         model.should have_index(:one, :unique => true)
       end
 
-      it "doesn't match if the index isn't unique" do
+      it 'does not match if the index is not unique' do
         ActiveRecord::Base.connection.add_index(:users, :one)
         model.should_not have_index(:one, :unique => true)
       end
 
-      it "doesn't match if the index doesn't exist" do
+      it 'does not match if the index does not exist' do
         model.should_not have_index(:one, :unique => true)
       end
     end
@@ -70,7 +70,7 @@ describe :have_index do
         model.should have_index(:one, :name => :oneness)
       end
 
-      it "doesn't match if the index doesn't exist" do
+      it 'does not match if the index does not exist' do
         model.should_not have_index(:one, :name => :oneness)
       end
     end
@@ -81,7 +81,7 @@ describe :have_index do
         model.should have_index(:name => :oneness)
       end
 
-      it "doesn't match if the index doesn't exist" do
+      it 'does not match if the index does not exist' do
         model.should_not have_index(:name => :oneness)
       end
     end

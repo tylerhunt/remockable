@@ -35,5 +35,5 @@ end
 
 RSpec.configure do |config|
   config.include(ClassBuilder)
-  config.after(:each) { drop_created_tables }
+  config.after { drop_created_tables }
 end

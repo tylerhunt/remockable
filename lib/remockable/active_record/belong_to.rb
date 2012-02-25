@@ -1,8 +1,8 @@
-RSpec::Matchers.define(:belong_to) do |*attributes|
+RSpec::Matchers.define(:belong_to) do |*association|
   extend Remockable::ActiveRecord::Helpers
 
-  @expected = attributes.extract_options!
-  @association = attributes.first
+  @expected = association.extract_options!
+  @association = association.shift
 
   unsupported_options %w(extend)
   valid_options %w(class_name conditions select foreign_key primary_key dependent counter_cache include polymorphic readonly validate autosave touch inverse_of)

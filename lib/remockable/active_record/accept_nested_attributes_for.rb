@@ -1,8 +1,8 @@
-RSpec::Matchers.define(:accept_nested_attributes_for) do |*attributes|
+RSpec::Matchers.define(:accept_nested_attributes_for) do |*association|
   extend Remockable::ActiveRecord::Helpers
 
-  @expected = attributes.extract_options!
-  @association = attributes.first
+  @expected = association.extract_options!
+  @association = association.shift
 
   unsupported_options %w(reject_if)
   valid_options %w(allow_destroy limit update_only)

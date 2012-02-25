@@ -10,10 +10,6 @@ module Remockable
           validator.kind == type
         end
       end
-
-      def validate_attributes
-        @attributes.all? { |attribute| yield(validator_for(attribute)) }
-      end
     end
   end
 end

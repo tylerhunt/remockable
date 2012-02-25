@@ -1,8 +1,8 @@
-RSpec::Matchers.define(:have_one) do |*attributes|
+RSpec::Matchers.define(:have_one) do |*association|
   extend Remockable::ActiveRecord::Helpers
 
-  @expected = attributes.extract_options!
-  @association = attributes.first
+  @expected = association.extract_options!
+  @association = association.shift
 
   unsupported_options %w(extend)
   valid_options %w(class_name conditions order dependent foreign_key primary_key include as select through source source_type readonly validate autosave inverse_of)

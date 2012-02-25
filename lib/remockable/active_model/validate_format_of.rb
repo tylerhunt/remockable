@@ -1,17 +1,16 @@
-RSpec::Matchers.define(:validate_format_of) do |*attributes|
+RSpec::Matchers.define(:validate_format_of) do |*attribute|
   extend Remockable::ActiveModel::Helpers
 
   @type = :format
-  @expected = attributes.extract_options!
-  @attributes = attributes
+  @expected = attribute.extract_options!
+  @attribute = attribute.shift
 
   unsupported_options %w(if unless)
   valid_options %w(allow_blank allow_nil message on with without)
 
   match do |actual|
-    validate_attributes do |validator|
-      validator && validator.options.slice(*expected.keys) == expected
-    end
+    validator = validator_for(@attribute)
+    validator && validator.options.slice(*expected.keys) == expected
   end
 
   failure_message_for_should do |actual|
@@ -24,6 +23,6 @@ RSpec::Matchers.define(:validate_format_of) do |*attributes|
 
   description do
     with = " with #{expected.inspect}" if expected.any?
-    "validate #{type} of #{@attributes.to_sentence}#{with}"
+    "validate #{type} of #{@attribute}#{with}"
   end
 end

@@ -1,19 +1,18 @@
-RSpec::Matchers.define(:validate_length_of) do |*attributes|
+RSpec::Matchers.define(:validate_length_of) do |*attribute|
   extend Remockable::ActiveModel::Helpers
 
   @type = :length
-  @expected = attributes.extract_options!
-  @attributes = attributes
+  @expected = attribute.extract_options!
+  @attribute = attribute.shift
 
   unsupported_options %w(if unless tokenizer)
   valid_options %w(allow_blank allow_nil in is maximum message minimum on
     too_long too_short within wrong_length)
 
   match do |actual|
-    validate_attributes do |validator|
-      expected = normalize_expected
-      validator && validator.options.slice(*expected.keys) == expected
-    end
+    expected = normalize_expected
+    validator = validator_for(@attribute)
+    validator && validator.options.slice(*expected.keys) == expected
   end
 
   def normalize_expected
@@ -35,6 +34,6 @@ RSpec::Matchers.define(:validate_length_of) do |*attributes|
 
   description do
     with = " with #{expected.inspect}" if expected.any?
-    "validate #{type} of #{@attributes.to_sentence}#{with}"
+    "validate #{type} of #{@attribute}#{with}"
   end
 end

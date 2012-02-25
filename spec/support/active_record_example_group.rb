@@ -8,7 +8,7 @@ module ActiveRecordExampleGroup
     let(:task) { rake[self.class.description] }
     let(:namespace) { self.class.description.split(':').first }
 
-    before(:each) do
+    before do
       ActiveRecord::Base.establish_connection(
         :adapter => 'sqlite3',
         :database => ':memory:'

@@ -2,13 +2,11 @@ require 'spec_helper'
 
 describe :validate_associated do
   let(:validator_name) { :associated }
-  let(:attributes) { :company }
+  let(:attribute) { :company }
   let(:default_options) { { :on => :create } }
 
-  before(:each) do
-    create_table(:users) do |table|
-      table.string :company_id
-    end
+  before do
+    create_table(:users) { |table| table.string(:company_id) }
   end
 
   it_behaves_like 'a validation matcher' do

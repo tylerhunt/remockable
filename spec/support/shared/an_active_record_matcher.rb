@@ -5,13 +5,13 @@ shared_examples_for 'an Active Record matcher' do
     context "with option #{option_name.inspect}" do
       let(:options) { [:company, option_name => positive] }
 
-      before(:each) { model.send(macro, *options) }
+      before { model.send(macro, *options) }
 
       it 'matches if the options match' do
         should send(matcher_name, :company, option_name => positive)
       end
 
-      it "doesn't match if the options don't match" do
+      it 'does not match if the options do not match' do
         should_not send(matcher_name, :company, option_name => negative)
       end
     end
@@ -30,20 +30,20 @@ shared_examples_for 'an Active Record matcher' do
   context 'failure messages' do
     let(:matcher) { send(matcher_name, *options) }
 
-    before(:each) { matcher.matches?(subject) }
+    before { matcher.matches?(subject) }
 
     it 'has a custom failure message' do
       matcher.failure_message.should ==
         "Expected #{subject.class.name} to #{matcher.description}"
     end
 
-    it 'sets a custom negative failure message' do
+    it 'has a custom negative failure message' do
       matcher.negative_failure_message.should ==
         "Did not expect #{subject.class.name} to #{matcher.description}"
     end
   end
 
-  context "with an unknown option" do
+  context 'with an unknown option' do
     it 'raises an error' do
       expect {
         send(matcher_name, :xxx => true)

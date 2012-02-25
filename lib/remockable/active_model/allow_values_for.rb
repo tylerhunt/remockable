@@ -1,6 +1,6 @@
-RSpec::Matchers.define(:allow_values_for) do |*attributes_and_values|
-  @attribute = attributes_and_values.shift
-  @values = attributes_and_values
+RSpec::Matchers.define(:allow_values_for) do |*attribute_and_values|
+  @attribute = attribute_and_values.shift
+  @values = attribute_and_values
 
   match_for_should do |actual|
     @values.all? do |value|

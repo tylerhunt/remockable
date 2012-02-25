@@ -1,8 +1,8 @@
-RSpec::Matchers.define(:have_column) do |*attributes|
+RSpec::Matchers.define(:have_column) do |*column|
   extend Remockable::ActiveRecord::Helpers
 
-  @expected = attributes.extract_options!
-  @column = attributes.first
+  @expected = column.extract_options!
+  @column = column.shift
 
   valid_options %w(default limit null precision scale type)
 

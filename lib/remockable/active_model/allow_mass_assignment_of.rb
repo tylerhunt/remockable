@@ -1,7 +1,8 @@
-RSpec::Matchers.define(:allow_mass_assignment_of) do |*attributes|
-  @options = attributes.extract_options!
+RSpec::Matchers.define(:allow_mass_assignment_of) do |*attribute|
+  @options = attribute.extract_options!
+  @attribute = attribute.shift
+
   @role = @options[:as] || :default
-  @attributes = attributes
   @authorizer = nil
 
   def authorizer(actual)
@@ -11,11 +12,11 @@ RSpec::Matchers.define(:allow_mass_assignment_of) do |*attributes|
   end
 
   match_for_should do |actual|
-    @attributes.all? { |attribute| !authorizer(actual).deny?(attribute) }
+    !authorizer(actual).deny?(@attribute)
   end
 
   match_for_should_not do |actual|
-    @attributes.all? { |attribute| authorizer(actual).deny?(attribute) }
+    authorizer(actual).deny?(@attribute)
   end
 
   failure_message_for_should do |actual|
@@ -27,6 +28,6 @@ RSpec::Matchers.define(:allow_mass_assignment_of) do |*attributes|
   end
 
   description do
-    "allow mass-assignment of #{@attributes.to_sentence}"
+    "allow mass-assignment of #{@attribute}"
   end
 end

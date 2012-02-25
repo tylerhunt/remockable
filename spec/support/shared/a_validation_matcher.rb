@@ -1,5 +1,5 @@
 shared_examples_for 'a validation matcher' do
-  let(:attributes) { :one }
+  let(:attribute) { :one }
   let(:options) { default_options }
   let(:matcher_name) { self.class.parent.parent.description }
 
@@ -9,8 +9,8 @@ shared_examples_for 'a validation matcher' do
     end
   end
 
-  before(:each) do
-    model.validates(*attributes, validator_name => options)
+  before do
+    model.validates(attribute, validator_name => options)
   end
 
   subject { model.new }
@@ -24,11 +24,11 @@ shared_examples_for 'a validation matcher' do
       end
 
       it 'matches if the options match' do
-        should send(matcher_name, *attributes, option_name => positive)
+        should send(matcher_name, attribute, option_name => positive)
       end
 
-      it "doesn't match if the options don't match" do
-        should_not send(matcher_name, *attributes, option_name => negative)
+      it 'does not match if the options do not match' do
+        should_not send(matcher_name, attribute, option_name => negative)
       end
     end
   end
@@ -48,56 +48,43 @@ shared_examples_for 'a validation matcher' do
   end
 
   context 'description' do
-    let(:matcher) { send(matcher_name, *attributes) }
+    let(:matcher) { send(matcher_name, attribute) }
 
     it 'has a custom description' do
       name = matcher.instance_variable_get(:@name).to_s.gsub(/_/, ' ')
-      attributes = matcher.instance_variable_get(:@attributes).to_sentence
       with = " with #{matcher.expected}" if matcher.expected.any?
 
-      matcher.description.should == "#{name} #{attributes}#{with}"
+      matcher.description.should == "#{name} #{attribute}#{with}"
     end
   end
 
   context 'failure messages' do
-    let(:matcher) { send(matcher_name, *attributes) }
+    let(:matcher) { send(matcher_name, attribute) }
 
-    before(:each) { matcher.matches?(subject) }
+    before { matcher.matches?(subject) }
 
     it 'has a custom failure message' do
       matcher.failure_message.should ==
         "Expected #{subject.class.name} to #{matcher.description}"
     end
 
-    it 'sets a custom negative failure message' do
+    it 'has a custom negative failure message' do
       matcher.negative_failure_message.should ==
         "Did not expect #{subject.class.name} to #{matcher.description}"
     end
   end
 
-  context "with a single attribute" do
+  context 'without options' do
     it 'matches if the validator has been defined' do
       should send(matcher_name, :one)
     end
 
-    it "doesn't match if the validator hasn't been defined" do
+    it 'does not match if the validator has not been defined' do
       should_not send(matcher_name, :two)
     end
   end
 
-  context "with multiple attributes" do
-    let(:attributes) { [:one, :two] }
-
-    it 'matches if the validators have been defined' do
-      should send(matcher_name, :one, :two)
-    end
-
-    it "doesn't match if the validators haven't been defined" do
-      should_not send(matcher_name, :one, :two, :three)
-    end
-  end
-
-  context "with an unknown option" do
+  context 'with an unknown option' do
     it 'raises an error' do
       expect {
         send(matcher_name, :xxx => true)

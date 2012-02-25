@@ -1,8 +1,8 @@
-RSpec::Matchers.define(:have_scope) do |*expected|
+RSpec::Matchers.define(:have_scope) do |*name|
   extend Remockable::ActiveRecord::Helpers
 
-  @expected = expected.extract_options!
-  @name = expected.first
+  @expected = name.extract_options!
+  @name = name.shift
   @relation = nil
 
   valid_options %w(with)

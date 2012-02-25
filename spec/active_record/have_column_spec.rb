@@ -6,9 +6,8 @@ describe :have_column do
   it_behaves_like 'an Active Record matcher' do
     let(:model) { build_class(:User, ActiveRecord::Base) }
 
-    before(:each) do
-      create_table(:users) do |table|
-      end
+    before do
+      create_table(:users) { |table| }
     end
 
     subject { model.new }
@@ -30,7 +29,7 @@ describe :have_column do
         model.should have_column(:one)
       end
 
-      it "doesn't match if the column doesn't exist" do
+      it 'does not match if the column does not exist' do
         model.should_not have_column(:one)
       end
     end
@@ -41,7 +40,7 @@ describe :have_column do
         model.should have_column(:one, :default => 1)
       end
 
-      it "doesn't match if the column doesn't have the same default" do
+      it 'does not match if the column does not have the same default' do
         ActiveRecord::Base.connection.add_column(:users, :one, :integer, :default => 2)
         model.should_not have_column(:one, :default => 1)
       end
@@ -53,7 +52,7 @@ describe :have_column do
         model.should have_column(:one, :limit => 10)
       end
 
-      it "doesn't match if the column doesn't have the same limit" do
+      it 'does not match if the column does not have the same limit' do
         ActiveRecord::Base.connection.add_column(:users, :one, :string, :limit => 5)
         model.should_not have_column(:one, :limit => 10)
       end
@@ -65,7 +64,7 @@ describe :have_column do
         model.should have_column(:one, :null => false)
       end
 
-      it "doesn't match if the column doesn't have the same null" do
+      it 'does not match if the column does not have the same null' do
         ActiveRecord::Base.connection.add_column(:users, :one, :integer)
         model.should_not have_column(:one, :null => false)
       end
@@ -77,7 +76,7 @@ describe :have_column do
         model.should have_column(:one, :precision => 8)
       end
 
-      it "doesn't match if the column doesn't have the same null" do
+      it 'does not match if the column does not have the same null' do
         ActiveRecord::Base.connection.add_column(:users, :one, :decimal, :precision => 8)
         model.should_not have_column(:one, :precision => 5)
       end
@@ -89,7 +88,7 @@ describe :have_column do
         model.should have_column(:one, :scale => 2)
       end
 
-      it "doesn't match if the column doesn't have the same null" do
+      it 'does not match if the column does not have the same null' do
         ActiveRecord::Base.connection.add_column(:users, :one, :decimal, :precision => 8, :scale => 2)
         model.should_not have_column(:one, :scale => 3)
       end
@@ -101,7 +100,7 @@ describe :have_column do
         model.should have_column(:one, :type => :integer)
       end
 
-      it "doesn't match if the column doesn't have the same type" do
+      it 'does not match if the column does not have the same type' do
         ActiveRecord::Base.connection.add_column(:users, :one, :string)
         model.should_not have_column(:one, :type => :integer)
       end

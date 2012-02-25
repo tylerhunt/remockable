@@ -1,8 +1,8 @@
-RSpec::Matchers.define(:have_index) do |*attributes|
+RSpec::Matchers.define(:have_index) do |*columns|
   extend Remockable::ActiveRecord::Helpers
 
-  @expected = attributes.extract_options!
-  @columns = attributes
+  @expected = columns.extract_options!
+  @columns = columns
 
   valid_options %w(name unique)
 

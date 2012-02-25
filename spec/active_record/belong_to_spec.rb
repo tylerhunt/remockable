@@ -7,10 +7,8 @@ describe :belong_to do
   it_behaves_like 'an Active Record matcher' do
     let(:model) { build_class(:User, ActiveRecord::Base) }
 
-    before(:each) do
-      create_table(:users) do |table|
-        table.integer :company_id
-      end
+    before do
+      create_table(:users) { |table| table.integer(:company_id) }
     end
 
     subject { model.new }
@@ -34,11 +32,11 @@ describe :belong_to do
         model.should belong_to(*options)
       end
 
-      it "doesn't match if the association doesn't exist" do
+      it 'does not match if the association does not exist' do
         model.should_not belong_to(*options)
       end
 
-      it "doesn't match if the association is of the wrong type" do
+      it 'does not match if the association is of the wrong type' do
         model.has_many(*options)
         model.should_not belong_to(*options)
       end

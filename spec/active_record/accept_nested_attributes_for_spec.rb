@@ -8,12 +8,10 @@ describe :accept_nested_attributes_for do
     let(:matcher_name) { :accept_nested_attributes_for }
 
     let(:model) do
-      build_class(:User, ActiveRecord::Base) do
-        belongs_to :company
-      end
+      build_class(:User, ActiveRecord::Base) { belongs_to :company }
     end
 
-    before(:each) { create_table(:users) }
+    before { create_table(:users) }
 
     subject { model.new }
 
@@ -35,7 +33,7 @@ describe :accept_nested_attributes_for do
         model.should accept_nested_attributes_for(*options)
       end
 
-      it "doesn't match if the model doesn't accept the nested attributes" do
+      it 'does not match if the model does not accept the nested attributes' do
         model.should_not accept_nested_attributes_for(*options)
       end
     end
