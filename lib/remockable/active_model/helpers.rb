@@ -25,7 +25,7 @@ module Remockable
           if !expected_value.nil? && expected_value.is_a?(Symbol)
             validator.options[option] == expected_value
           elsif !expected_value.nil?
-            validator.options[option].call(expected_value) == true
+            validator.options[option].call(actual) == true
           else
             true
           end

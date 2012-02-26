@@ -54,7 +54,7 @@ shared_examples_for 'a validation matcher' do
     end
 
     context "with option #{option_name.inspect} with a procedure" do
-      let(:procedure) { lambda { |value| value } }
+      let(:procedure) { lambda { |record| record.skip_validations } }
 
       let(:options) {
         option = { option_name => procedure }
@@ -62,11 +62,13 @@ shared_examples_for 'a validation matcher' do
       }
 
       it 'matches if the options match' do
+        subject.stub(:skip_validations).and_return(true)
         should send(matcher_name, attribute, option_name => true)
       end
 
       it 'does not match if the options do not match' do
-        should_not send(matcher_name, attribute, option_name => false)
+        subject.stub(:skip_validations).and_return(false)
+        should_not send(matcher_name, attribute, option_name => true)
       end
     end
   end
