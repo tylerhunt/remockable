@@ -37,6 +37,40 @@ shared_examples_for 'a validation matcher' do
     with_option(option_name, positive, negative, true)
   end
 
+  def self.with_conditional_option(option_name)
+    context "with option #{option_name.inspect} with a symbol" do
+      let(:options) {
+        option = { option_name => :returns_true }
+        default_options.is_a?(Hash) ? default_options.merge(option) : option
+      }
+
+      it 'matches if the options match' do
+        should send(matcher_name, attribute, option_name => :returns_true)
+      end
+
+      it 'does not match if the options do not match' do
+        should_not send(matcher_name, attribute, option_name => :returns_false)
+      end
+    end
+
+    context "with option #{option_name.inspect} with a procedure" do
+      let(:procedure) { lambda { |value| value } }
+
+      let(:options) {
+        option = { option_name => procedure }
+        default_options.is_a?(Hash) ? default_options.merge(option) : option
+      }
+
+      it 'matches if the options match' do
+        should send(matcher_name, attribute, option_name => true)
+      end
+
+      it 'does not match if the options do not match' do
+        should_not send(matcher_name, attribute, option_name => false)
+      end
+    end
+  end
+
   def self.with_unsupported_option(option_name, value=nil)
     context "with unsupported option #{option_name.inspect}" do
       it 'raises an error' do

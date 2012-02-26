@@ -12,7 +12,7 @@ describe :validate_format_of do
     with_option!(:with, /\d+/, /\w+/)
     with_option!(:without, /\d+/, /\w+/)
 
-    with_unsupported_option(:if, :allow_validation)
-    with_unsupported_option(:unless, :skip_validation)
+    with_conditional_option(:if)
+    with_conditional_option(:unless)
   end
 end

@@ -17,7 +17,7 @@ describe :validate_uniqueness_of do
     with_option(:message, 'is not unique!', 'invalid')
     with_option(:scope, :two, :three)
 
-    with_unsupported_option(:if, :allow_validation)
-    with_unsupported_option(:unless, :skip_validation)
+    with_conditional_option(:if)
+    with_conditional_option(:unless)
   end
 end

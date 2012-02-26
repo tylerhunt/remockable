@@ -5,7 +5,9 @@ RSpec::Matchers.define(:belong_to) do |*association|
   @association = association.shift
 
   unsupported_options %w(extend)
-  valid_options %w(class_name conditions select foreign_key primary_key dependent counter_cache include polymorphic readonly validate autosave touch inverse_of)
+  valid_options %w(class_name conditions select foreign_key primary_key
+    dependent counter_cache include polymorphic readonly validate autosave touch
+    inverse_of)
 
   match do |actual|
     if association = subject.class.reflect_on_association(@association)

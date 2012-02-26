@@ -18,8 +18,9 @@ describe :validate_length_of do
     with_option(:within, 1..10, 1..5)
     with_option(:wrong_length, 'is not five!', 'invalid')
 
-    with_unsupported_option(:if, :allow_validation)
-    with_unsupported_option(:unless, :skip_validation)
+    with_conditional_option(:if)
+    with_conditional_option(:unless)
+
     with_unsupported_option(:tokenizer, lambda { |string| string.scan(/\w+/) })
   end
 end

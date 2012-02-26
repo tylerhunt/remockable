@@ -10,7 +10,7 @@ describe :validate_inclusion_of do
     with_option(:in, [true, false], %w(male female))
     with_option(:message, 'is not in list!', 'invalid')
 
-    with_unsupported_option(:if, :allow_validation)
-    with_unsupported_option(:unless, :skip_validation)
+    with_conditional_option(:if)
+    with_conditional_option(:unless)
   end
 end

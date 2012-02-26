@@ -5,12 +5,12 @@ RSpec::Matchers.define(:validate_numericality_of) do |*attribute|
   @expected = attribute.extract_options!
   @attribute = attribute.shift
 
-  unsupported_options %w(if unless)
-  valid_options %w(allow_nil equal_to even greater_than greater_than_or_equal_to less_than less_than_or_equal_to message odd on only_integer)
+  valid_options %w(allow_nil equal_to even greater_than greater_than_or_equal_to
+    if less_than less_than_or_equal_to message odd on only_integer unless)
 
   match do |actual|
     validator = validator_for(@attribute)
-    validator && validator.options.slice(*expected.keys) == expected
+    validator && options_match(validator) && conditionals_match(validator)
   end
 
   failure_message_for_should do |actual|

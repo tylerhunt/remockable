@@ -5,12 +5,11 @@ RSpec::Matchers.define(:validate_exclusion_of) do |*attribute|
   @expected = attribute.extract_options!
   @attribute = attribute.shift
 
-  unsupported_options %w(if unless)
-  valid_options %w(allow_nil allow_blank in message on)
+  valid_options %w(allow_nil allow_blank if in message on unless)
 
   match do |actual|
     validator = validator_for(@attribute)
-    validator && validator.options.slice(*expected.keys) == expected
+    validator && options_match(validator) && conditionals_match(validator)
   end
 
   failure_message_for_should do |actual|

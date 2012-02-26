@@ -5,17 +5,19 @@ RSpec::Matchers.define(:validate_length_of) do |*attribute|
   @expected = attribute.extract_options!
   @attribute = attribute.shift
 
-  unsupported_options %w(if unless tokenizer)
-  valid_options %w(allow_blank allow_nil in is maximum message minimum on
-    too_long too_short within wrong_length)
+  unsupported_options %w(tokenizer)
+  valid_options %w(allow_blank allow_nil if in is maximum message minimum on
+    too_long too_short unless within wrong_length)
 
   match do |actual|
-    expected = normalize_expected
-    validator = validator_for(@attribute)
-    validator && validator.options.slice(*expected.keys) == expected
+    if validator = validator_for(@attribute)
+      options_match = options_match(validator, normalized_expected)
+      conditionals_match = conditionals_match(validator)
+      options_match && conditionals_match
+    end
   end
 
-  def normalize_expected
+  def normalized_expected
     expected.dup.tap do |expected|
       if within = expected.delete(:within) || expected.delete(:in)
         expected[:minimum] = within.first

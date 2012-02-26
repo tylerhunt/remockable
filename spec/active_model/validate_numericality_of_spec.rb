@@ -17,7 +17,7 @@ describe :validate_numericality_of do
     with_option(:on, :create, :update)
     with_option(:only_integer, true, false)
 
-    with_unsupported_option(:if, :allow_validation)
-    with_unsupported_option(:unless, :skip_validation)
+    with_conditional_option(:if)
+    with_conditional_option(:unless)
   end
 end

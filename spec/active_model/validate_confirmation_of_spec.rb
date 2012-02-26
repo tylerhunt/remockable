@@ -8,7 +8,7 @@ describe :validate_confirmation_of do
     with_option(:message, 'must match!', 'invalid')
     with_option(:on, :create, :update)
 
-    with_unsupported_option(:if, :allow_validation)
-    with_unsupported_option(:unless, :skip_validation)
+    with_conditional_option(:if)
+    with_conditional_option(:unless)
   end
 end
