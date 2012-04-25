@@ -10,7 +10,7 @@ RSpec::Matchers.define(:have_scope) do |*name|
   match do |actual|
     if subject.class.respond_to?(@name)
       scope = if @expected.key?(:with)
-        with = Array(@expected[:with])
+        with = [@expected[:with]] unless @expected[:with].is_a?(Array)
         subject.class.send(@name, *with)
       else
         subject.class.send(@name)
