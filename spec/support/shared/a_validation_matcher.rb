@@ -100,12 +100,12 @@ shared_examples_for 'a validation matcher' do
     before { matcher.matches?(subject) }
 
     it 'has a custom failure message' do
-      matcher.failure_message.should ==
+      matcher.failure_message_for_should.should ==
         "Expected #{subject.class.name} to #{matcher.description}"
     end
 
     it 'has a custom negative failure message' do
-      matcher.negative_failure_message.should ==
+      matcher.failure_message_for_should_not.should ==
         "Did not expect #{subject.class.name} to #{matcher.description}"
     end
   end
