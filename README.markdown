@@ -12,7 +12,7 @@ A collection of RSpec 2 matchers to simplify your web app specs.
 
 The goal of this project is to provide a modern replacement to the now
 unmaintained Remarkable project. Remarkable was a great asset when Rails 2.3
-was current, but now that Rails 3.0 has become mainstream, a gap has been left
+was current, but now that Rails 3 has become mainstream, a gap has been left
 by still unreleased Remarkable 4.0.
 
 In looking at the code for Remarkable to determine the feasibility of continuing
@@ -22,58 +22,67 @@ Remockable was born. It's an attempt to start with a clean slate but maintain
 the original goal of Remarkable in spirit.
 
 
-## Active Model Matchers
+## Installation
+
+Add this line to your application's Gemfile:
+
+``` ruby
+gem 'remockable'
+```
+
+And then execute:
+
+    $ bundle
+
+Or install it yourself as:
+
+    $ gem install remockable
+
+
+## Usage
+
+Remockable provides matchers for use with Active Model and Active Record
+classes.
+
+### Active Model Matchers
 
 The following Active Model matchers are supported:
 
-  * allow_mass_assignment_of
-  * validate_acceptance_of
-  * validate_confirmation_of
-  * validate_exclusion_of
-  * validate_format_of
-  * validate_inclusion_of
-  * validate_length_of
-  * validate_numericality_of
-  * validate_presence_of
+  * `allow_mass_assignment_of`
+  * `validate_acceptance_of`
+  * `validate_confirmation_of`
+  * `validate_exclusion_of`
+  * `validate_format_of`
+  * `validate_inclusion_of`
+  * `validate_length_of`
+  * `validate_numericality_of`
+  * `validate_presence_of`
 
-
-## Active Record Matchers
+### Active Record Matchers
 
 The following Active Record matchers are supported:
 
-  * have_column
-  * have_index
-  * have_scope
-  * have_default_scope
-  * belong_to
-  * have_one
-  * have_many
-  * have_and_belong_to_many
-  * validate_associated
-  * validate_uniqueness_of
+  * `have_column`
+  * `have_index`
+  * `have_scope`
+  * `have_default_scope`
+  * `belong_to`
+  * `have_one`
+  * `have_many`
+  * `have_and_belong_to_many`
+  * `validate_associated`
+  * `validate_uniqueness_of`
 
 
-## Installation
+## Contributing
 
-Add the `remockable` gem to your `Gemfile`:
-
-    gem 'remockable'
-
-Then run `bundle install` to install the gem.
-
-You'll also want to make sure the library is required by RSpec, so add the
-following to your `spec_helper.rb` or someone else where it will get loaded
-when your specs do:
-
-    require 'remockable'
-
-
-## Compatibility
-
-Remockable is compatible with Rails 3.0, but it has also been tested against
-3.1 and appears to be working fine there, too.
+1. Fork it.
+2. Create your feature branch (`git checkout -b my-new-feature`).
+3. Commit your changes (`git commit -am 'Added some feature'`).
+4. Push to the branch (`git push origin my-new-feature`).
+5. Create a new Pull Request.
 
 
 ## Copyright
 
-Copyright © 2010-2011 Tyler Hunt. See LICENSE for details.
+Copyright © 2010-2012 Tyler Hunt. See LICENSE for details.
