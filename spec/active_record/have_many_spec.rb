@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe :have_many do
   let(:macro) { :has_many }
-  let(:options) { [:posts, :dependent => :destroy] }
+  let(:options) { [:posts, { :dependent => :destroy }] }
 
   it_behaves_like 'an Active Record matcher' do
     let(:model) { build_class(:User, ActiveRecord::Base) }
@@ -18,7 +18,7 @@ describe :have_many do
 
       it 'has a custom description' do
         association = matcher.instance_variable_get(:@association)
-        with = " with #{matcher.expected}" if matcher.expected.any?
+        with = " with #{matcher.expected.inspect}" if matcher.expected.any?
         matcher.description.should == "have many #{association}#{with}"
       end
     end

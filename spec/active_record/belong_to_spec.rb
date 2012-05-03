@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe :belong_to do
   let(:macro) { :belongs_to }
-  let(:options) { [:company, :dependent => :destroy] }
+  let(:options) { [:company, { :dependent => :destroy }] }
 
   it_behaves_like 'an Active Record matcher' do
     let(:model) { build_class(:User, ActiveRecord::Base) }
@@ -19,7 +19,7 @@ describe :belong_to do
       it 'has a custom description' do
         name = matcher.instance_variable_get(:@name).to_s.gsub(/_/, ' ')
         association = matcher.instance_variable_get(:@association)
-        with = " with #{matcher.expected}" if matcher.expected.any?
+        with = " with #{matcher.expected.inspect}" if matcher.expected.any?
         matcher.description.should == "#{name} #{association}#{with}"
       end
     end

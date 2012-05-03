@@ -3,7 +3,7 @@ shared_examples_for 'an Active Record matcher' do
 
   def self.with_option(option_name, positive, negative)
     context "with option #{option_name.inspect}" do
-      let(:options) { [:company, option_name => positive] }
+      let(:options) { [:company, { option_name => positive }] }
 
       before { model.send(macro, *options) }
 

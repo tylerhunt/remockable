@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe :accept_nested_attributes_for do
   let(:macro) { :accepts_nested_attributes_for }
-  let(:options) { [:company, :allow_destroy => true] }
+  let(:options) { [:company, { :allow_destroy => true }] }
 
   it_behaves_like 'an Active Record matcher' do
     let(:matcher_name) { :accept_nested_attributes_for }
@@ -20,7 +20,7 @@ describe :accept_nested_attributes_for do
 
       it 'has a custom description' do
         association = matcher.instance_variable_get(:@association)
-        with = " with #{matcher.expected}" if matcher.expected.any?
+        with = " with #{matcher.expected.inspect}" if matcher.expected.any?
         matcher.description.should == "accept nested attributes for #{association}#{with}"
       end
     end
