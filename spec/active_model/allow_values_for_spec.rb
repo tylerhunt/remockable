@@ -9,7 +9,7 @@ describe :allow_values_for do
     build_class(:User) { include ActiveModel::Validations }
   end
 
-  before { model.validates(attribute, format: /^\d+$/) }
+  before { model.validates(attribute, :format => /^\d+$/) }
 
   subject { model.new }
 
