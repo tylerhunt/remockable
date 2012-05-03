@@ -1,5 +1,10 @@
 # Remockable
 
+[![Build Status][travis-image]][travis]
+
+[travis]: http://travis-ci.org/tylerhunt/remockable
+[travis-image]: https://secure.travis-ci.org/tylerhunt/remockable.png
+
 A collection of RSpec 2 matchers to simplify your web app specs.
 
 
