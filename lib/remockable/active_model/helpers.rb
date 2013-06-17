@@ -1,3 +1,5 @@
+require 'remockable/helpers'
+
 module Remockable
   module ActiveModel
     module Helpers
