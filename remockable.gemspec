@@ -6,6 +6,7 @@ Gem::Specification.new do |spec|
   spec.authors = ['Tyler Hunt']
   spec.summary = 'A collection of RSpec matchers for web apps.'
   spec.homepage = 'http://github.com/tylerhunt/remockable'
+  spec.license = 'MIT'
 
   spec.add_dependency 'activemodel', '~> 3.0'
   spec.add_dependency 'activerecord', '~> 3.0'
