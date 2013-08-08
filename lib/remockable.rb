@@ -1,4 +1,6 @@
 require 'rspec/core'
+require 'rspec/mocks'
+require 'rspec/expectations'
 
 require 'active_support/core_ext/array/conversions'
 require 'active_support/core_ext/array/extract_options'
