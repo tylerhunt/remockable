@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+  * Support Rails 4 ([Tyler Hunt][tylerhunt])
+
 ## 0.1.2 (2013-06-17, 2013 (16 KB)
 
   * Specify license in gemspec ([Tyler Hunt][tylerhunt])
