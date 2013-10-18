@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+  * Require Rails ~> 4.0 ([Tyler Hunt][tylerhunt])
+
 ## 0.2.0 (2013-10-18)
 
   * Remove support Rails 3 ([Tyler Hunt][tylerhunt])
