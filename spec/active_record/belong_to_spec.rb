@@ -43,20 +43,15 @@ describe :belong_to do
     end
 
     with_option(:class_name, 'Company', 'Organization')
-    with_option(:conditions, { :id => 1 }, { :id => 2 })
-    with_option(:select, %w(id), %w(name))
     with_option(:foreign_key, :company_id, :organization_id)
+    with_option(:foreign_type, :company_type, :organization_type)
     with_option(:primary_key, :id, :company_id)
     with_option(:dependent, :destroy, :nullify)
     with_option(:counter_cache, true, false)
-    with_option(:include, :users, :employees)
     with_option(:polymorphic, true, false)
-    with_option(:readonly, true, false)
     with_option(:validate, true, false)
     with_option(:autosave, true, false)
     with_option(:touch, true, false)
     with_option(:inverse_of, :users, :employees)
-
-    with_unsupported_option(:extend, Module.new)
   end
 end

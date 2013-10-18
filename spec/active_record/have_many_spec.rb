@@ -42,29 +42,16 @@ describe :have_many do
     end
 
     with_option(:class_name, 'Post', 'Blog')
-    with_option(:conditions, { :published => true }, { :published => false })
-    with_option(:order, %w(published_at), %w(title))
     with_option(:foreign_key, :post_id, :blog_id)
     with_option(:primary_key, :id, :post_id)
     with_option(:dependent, :destroy, :nullify)
-    with_option(:finder_sql, 'SELECT * FROM posts', 'SELECT * FROM blogs')
-    with_option(:counter_sql, 'SELECT COUNT(*) FROM posts', 'SELECT COUNT(*) FROM blogs')
-    with_option(:include, :comments, :trackbacks)
-    with_option(:group, 'comments_count', 'trackbacks_count')
-    with_option(:having, 'comments_count > 5', 'trackbacks_count > 5')
-    with_option(:limit, 5, 10)
-    with_option(:offset, 10, 20)
-    with_option(:select, %w(id), %w(title))
+    with_option(:counter_cache, :post_count, :posts_count)
     with_option(:as, :postable, :bloggable)
     with_option(:through, :postings, :bloggings)
     with_option(:source, :piece, :work)
     with_option(:source_type, 'Post', 'Blog')
-    with_option(:uniq, true, false)
-    with_option(:readonly, true, false)
     with_option(:validate, true, false)
     with_option(:autosave, true, false)
     with_option(:inverse_of, :users, :employees)
-
-    with_unsupported_option(:extend, Module.new)
   end
 end

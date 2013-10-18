@@ -4,8 +4,8 @@ RSpec::Matchers.define(:have_one) do |*association|
   @expected = association.extract_options!
   @association = association.shift
 
-  unsupported_options %w(extend)
-  valid_options %w(class_name conditions order dependent foreign_key primary_key include as select through source source_type readonly validate autosave inverse_of)
+  valid_options %w(class_name dependent foreign_key primary_key as through
+    source source_type validate autosave inverse_of)
 
   match do |actual|
     if association = subject.class.reflect_on_association(@association)

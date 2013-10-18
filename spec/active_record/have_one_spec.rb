@@ -42,20 +42,15 @@ describe :have_one do
     end
 
     with_option(:class_name, 'Address', 'Location')
-    with_option(:conditions, { :id => 1 }, { :id => 2 })
-    with_option(:order, %w(id), %w(name))
     with_option(:dependent, :destroy, :nullify)
     with_option(:foreign_key, :address_id, :location_id)
     with_option(:primary_key, :id, :address_id)
-    with_option(:include, :country, :state)
     with_option(:as, :addressable, :locatable)
-    with_option(:select, %w(id), %w(name))
     with_option(:through, :offices, :locations)
-    with_option(:readonly, true, false)
+    with_option(:source, :addressable, :contactable, through: :offices)
+    with_option(:source_type, 'Company', 'Organization', through: :offices)
     with_option(:validate, true, false)
     with_option(:autosave, true, false)
     with_option(:inverse_of, :user, :employee)
-
-    with_unsupported_option(:extend, Module.new)
   end
 end

@@ -7,13 +7,15 @@
 
 A collection of RSpec 2 matchers to simplify your web app specs.
 
+*Note:* Rails 3 support was dropped in version 0.2.
+
 
 ## Background
 
 The goal of this project is to provide a modern replacement to the now
 unmaintained Remarkable project. Remarkable was a great asset when Rails 2.3
-was current, but now that Rails 3 has become mainstream, a gap has been left
-by still unreleased Remarkable 4.0.
+was current, but a gap has been left by the unreleased Remarkable 4.0 since the
+release of Rails 3 and 4.
 
 In looking at the code for Remarkable to determine the feasibility of continuing
 work on Remarkable itself, it seems clear that the scope of that project has
@@ -24,7 +26,7 @@ the original goal of Remarkable in spirit.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Add this line to your application's `Gemfile`:
 
 ``` ruby
 gem 'remockable'
@@ -48,7 +50,6 @@ classes.
 
 The following Active Model matchers are supported:
 
-  * `allow_mass_assignment_of`
   * `validate_acceptance_of`
   * `validate_confirmation_of`
   * `validate_exclusion_of`
@@ -85,4 +86,4 @@ The following Active Record matchers are supported:
 
 ## Copyright
 
-Copyright © 2010-2012 Tyler Hunt. See LICENSE for details.
+Copyright © 2010-2013 Tyler Hunt. See LICENSE for details.

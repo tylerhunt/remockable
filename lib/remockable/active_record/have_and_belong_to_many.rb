@@ -4,10 +4,8 @@ RSpec::Matchers.define(:have_and_belong_to_many) do |*association|
   @expected = association.extract_options!
   @association = association.shift
 
-  unsupported_options %w(extend)
   valid_options %w(class_name join_table foreign_key association_foreign_key
-    conditions order uniq finder_sql counter_sql delete_sql insert_sql include
-    group having limit offset select readonly validate autosave)
+    validate autosave)
 
   match do |actual|
     if association = subject.class.reflect_on_association(@association)

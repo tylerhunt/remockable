@@ -7,8 +7,8 @@ RSpec::Matchers.define(:have_default_scope) do |*expected|
   valid_options %w()
 
   match do |actual|
-    if subject.class.respond_to?(:scoped)
-      scope = subject.class.scoped
+    if subject.class.respond_to?(:all)
+      scope = subject.class.all
 
       if scope.is_a?(ActiveRecord::Relation)
         if @relation

@@ -38,7 +38,7 @@ RSpec::Matchers.define(:have_scope) do |*name|
     query_methods = %w(eager_load from group having includes joins limit lock offset order preload readonly reorder select where)
 
     if query_methods.include?(method.to_s)
-      @relation ||= subject.class.scoped
+      @relation ||= subject.class.all
       @relation = @relation.send(method, *args)
       self
     else

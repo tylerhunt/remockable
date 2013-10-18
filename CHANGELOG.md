@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+  * Remove support Rails 3 ([Tyler Hunt][tylerhunt])
   * Support Rails 4 ([Tyler Hunt][tylerhunt])
 
 ## 0.1.2 (2013-06-17, 2013 (16 KB)
