@@ -1,22 +1,22 @@
 # Changelog
 
-## Unreleased
+## 0.2.0 (2013-10-18)
 
   * Remove support Rails 3 ([Tyler Hunt][tylerhunt])
   * Support Rails 4 ([Tyler Hunt][tylerhunt])
 
-## 0.1.2 (2013-06-17, 2013 (16 KB)
+## 0.1.2 (2013-06-17)
 
   * Specify license in gemspec ([Tyler Hunt][tylerhunt])
   * Add missing dependency require statements ([Tyler Hunt][tylerhunt])
   * Restore support for Ruby 1.8 ([Tyler Hunt][tylerhunt])
 
-## 0.1.1 (2012-04-25, 2012 (8.5 KB)
+## 0.1.1 (2012-04-25)
 
   * Do not rely on a `:with` option having `#to_a` ([Tyler Hunt][tylerhunt])
   * Update `:if`/`:unless` support to use instance ([Tyler Hunt][tylerhunt])
 
-## 0.1.0 (2012-02-26, 2012 (8.5 KB)
+## 0.1.0 (2012-02-26)
 
   * Support `:if` and `:unless` options ([Tyler Hunt][tylerhunt])
   * Remove support for multiple attributes ([Tyler Hunt][tylerhunt])
