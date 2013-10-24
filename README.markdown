@@ -20,13 +20,13 @@ release of Rails 3 and 4.
 In looking at the code for Remarkable to determine the feasibility of continuing
 work on Remarkable itself, it seems clear that the scope of that project has
 outgrown its usefulness for most users. It was with this conclusion in mind that
-Remockable was born. It's an attempt to start with a clean slate but maintain
+Remockable was born. It’s an attempt to start with a clean slate but maintain
 the original goal of Remarkable in spirit.
 
 
 ## Installation
 
-Add this line to your application's `Gemfile`:
+Add this line to your application’s `Gemfile`:
 
 ``` ruby
 gem 'remockable'
@@ -74,12 +74,16 @@ The following Active Record matchers are supported:
   * `validate_associated`
   * `validate_uniqueness_of`
 
-You can of course pass options to these matchers the same way you do inside of 
-your models, for instance when dealing with has many through relationships:
+### Options
 
-```ruby
-it { should have_many(:subscriptions, through: :customers) }
+Options may be passed to the matchers in the same way they’re passed to the
+macros. For instance, when dealing with `has_many :through` associations, you
+could specify the following:
+
+``` ruby
+it { should have_many :subscriptions, through: :customers }
 ```
+
 
 ## Contributing
 
