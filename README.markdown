@@ -74,6 +74,12 @@ The following Active Record matchers are supported:
   * `validate_associated`
   * `validate_uniqueness_of`
 
+You can of course pass options to these matchers the same way you do inside of 
+your models, for instance when dealing with has many through relationships:
+
+```ruby
+it { should have_many(:subscriptions, through: :customers) }
+```
 
 ## Contributing
 
