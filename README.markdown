@@ -1,11 +1,13 @@
 # Remockable
 
-[![Build Status][travis-image]][travis] [![Dependency Status][gemnasium-image]][gemnasium]
+[![Build Status][travis-image]][travis] [![Dependency Status][gemnasium-image]][gemnasium] [![Gem Version][rubygems-image]][rubygems]
 
 [travis]: http://travis-ci.org/tylerhunt/remockable
 [travis-image]: https://secure.travis-ci.org/tylerhunt/remockable.png
 [gemnasium]: https://gemnasium.com/tylerhunt/remockable
 [gemnasium-image]: https://gemnasium.com/tylerhunt/remockable.png
+[rubygems]: http://badge.fury.io/rb/remockable
+[rubygems-image]: https://badge.fury.io/rb/remockable.png
 
 A collection of RSpec 2 matchers to simplify your web app specs.
 
