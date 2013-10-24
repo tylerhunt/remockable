@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+  * Improve documentation ([Olivier Lacan][olivierlacan])
+
 ## 0.2.1 (2013-10-18)
 
   * Require Rails ~> 4.0 ([Tyler Hunt][tylerhunt])
@@ -84,4 +88,5 @@
   * Initial release ([Tyler Hunt][tylerhunt])
 
 [jswanner]: https://github.com/jswanner
+[olivierlacan]: https://github.com/olivierlacan
 [tylerhunt]: https://github.com/tylerhunt
