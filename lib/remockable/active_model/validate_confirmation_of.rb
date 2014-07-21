@@ -1,27 +1,25 @@
-RSpec::Matchers.define(:validate_confirmation_of) do |*attribute|
-  extend Remockable::ActiveModel::Helpers
+RSpec::Matchers.define(:validate_confirmation_of) do
+  include Remockable::ActiveModel::Helpers
 
-  @type = :confirmation
-  @expected = attribute.extract_options!
-  @attribute = attribute.shift
+  type :confirmation
 
-  valid_options %w(if message on unless)
+  valid_options %i(if message on unless)
 
   match do |actual|
-    validator = validator_for(@attribute)
+    validator = validator_for(attribute)
     validator && options_match(validator) && conditionals_match(validator)
   end
 
-  failure_message_for_should do |actual|
+  failure_message do |actual|
     "Expected #{subject.class.name} to #{description}"
   end
 
-  failure_message_for_should_not do |actual|
+  failure_message_when_negated do |actual|
     "Did not expect #{subject.class.name} to #{description}"
   end
 
   description do
-    with = " with #{expected.inspect}" if expected.any?
-    "validate #{type} of #{@attribute}#{with}"
+    with = " with #{options.inspect}" if options.any?
+    "validate #{type} of #{attribute}#{with}"
   end
 end

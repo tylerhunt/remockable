@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+  * Support and require RSpec ~> 3.0 ([Tyler Hunt][tylerhunt])
   * Improve documentation ([Olivier Lacan][olivierlacan])
 
 ## 0.2.1 (2013-10-18)

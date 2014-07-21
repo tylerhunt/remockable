@@ -19,8 +19,8 @@ describe :have_and_belong_to_many do
       let(:matcher) { send(matcher_name, *options) }
 
       it 'has a custom description' do
-        association = matcher.instance_variable_get(:@association)
-        with = " with #{matcher.expected.inspect}" if matcher.expected.any?
+        association = matcher.attribute
+        with = " with #{matcher.options.inspect}" if matcher.options.any?
 
         expect(matcher.description)
           .to eq "have and belong to #{association}#{with}"

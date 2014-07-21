@@ -1,17 +1,16 @@
-RSpec::Matchers.define(:have_index) do |*columns|
-  extend Remockable::ActiveRecord::Helpers
+RSpec::Matchers.define(:have_index) do
+  include Remockable::ActiveRecord::Helpers
 
-  @expected = columns.extract_options!
-  @columns = columns
+  valid_options %i(name unique)
 
-  valid_options %w(name unique)
+  def column_names
+    @column_names ||= expected_as_array.flatten.collect(&:to_s)
+  end
 
   match do |actual|
-    name = @expected[:name]
-    unique = @expected[:unique]
+    name = options[:name]
+    unique = options[:unique]
     indexes = ActiveRecord::Base.connection.indexes(subject.class.table_name)
-
-    column_names = @columns.flatten.collect(&:to_s)
 
     index = indexes.detect do |index|
       if column_names.any?
@@ -33,16 +32,16 @@ RSpec::Matchers.define(:have_index) do |*columns|
     index.name == name.to_s
   end
 
-  failure_message_for_should do |actual|
+  failure_message do |actual|
     "Expected #{subject.class.name} to #{description}"
   end
 
-  failure_message_for_should_not do |actual|
+  failure_message_when_negated do |actual|
     "Did not expect #{subject.class.name} to #{description}"
   end
 
   description do
-    with = " with #{expected.inspect}" if expected.any?
-    "have index on #{@columns.to_sentence}#{with}"
+    with = " with #{options.inspect}" if options.any?
+    "have index on #{column_names.to_sentence}#{with}"
   end
 end

@@ -1,29 +1,27 @@
 RSpec::Matchers.define(:have_scope) do |*name|
-  extend Remockable::ActiveRecord::Helpers
+  include Remockable::ActiveRecord::Helpers
 
-  @expected = name.extract_options!
-  @name = name.shift
-  @relation = nil
+  attr_accessor :relation
 
-  valid_options %w(with)
+  valid_options %i(with)
 
   match do |actual|
-    if subject.class.respond_to?(@name)
-      scope = if @expected.key?(:with)
-        with = [@expected[:with]] unless @expected[:with].is_a?(Array)
-        subject.class.send(@name, *with)
+    if subject.class.respond_to?(attribute)
+      scope = if options.key?(:with)
+        with = [options[:with]] unless options[:with].is_a?(Array)
+        subject.class.send(attribute, *with)
       else
-        subject.class.send(@name)
+        subject.class.send(attribute)
       end
 
       if scope.is_a?(ActiveRecord::Relation)
-        if @relation
-          query_matches = scope.arel.to_sql == @relation.arel.to_sql
-          eager_load_matches = scope.eager_load_values == @relation.eager_load_values
-          includes_matches = scope.includes_values == @relation.includes_values
-          lock_matches = scope.lock_value == @relation.lock_value
-          preload_matches = scope.preload_values == @relation.preload_values
-          readonly_matches = scope.readonly_value == @relation.readonly_value
+        if relation
+          query_matches = scope.arel.to_sql == relation.arel.to_sql
+          eager_load_matches = scope.eager_load_values == relation.eager_load_values
+          includes_matches = scope.includes_values == relation.includes_values
+          lock_matches = scope.lock_value == relation.lock_value
+          preload_matches = scope.preload_values == relation.preload_values
+          readonly_matches = scope.readonly_value == relation.readonly_value
 
           query_matches && eager_load_matches && includes_matches && lock_matches && preload_matches && readonly_matches
         else
@@ -35,27 +33,44 @@ RSpec::Matchers.define(:have_scope) do |*name|
 
   def method_missing(method, *args, &block)
     unsupported_query_methods = %(create_with)
-    query_methods = %w(eager_load from group having includes joins limit lock offset order preload readonly reorder select where)
 
-    if query_methods.include?(method.to_s)
-      @relation ||= subject.class.all
-      @relation = @relation.send(method, *args)
+    query_methods = %i(
+      eager_load
+      from
+      group
+      having
+      includes
+      joins
+      limit
+      lock
+      offset
+      order
+      preload
+      readonly
+      reorder
+      select
+      where
+    )
+
+    if query_methods.include?(method)
+      self.relation ||= subject.class.all
+      self.relation = relation.send(method, *args)
       self
     else
       super
     end
   end
 
-  failure_message_for_should do |actual|
+  failure_message do |actual|
     "Expected #{subject.class.name} to #{description}"
   end
 
-  failure_message_for_should_not do |actual|
+  failure_message_when_negated do |actual|
     "Did not expect #{subject.class.name} to #{description}"
   end
 
   description do
-    with = " with #{@expected.inspect}" if @expected.any?
-    "have scope #{@name}#{with}"
+    with = " with #{options.inspect}" if options.any?
+    "have scope #{attribute}#{with}"
   end
 end

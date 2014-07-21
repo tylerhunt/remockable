@@ -16,10 +16,9 @@ describe :have_column do
       let(:matcher) { send(matcher_name, *options) }
 
       it 'has a custom description' do
-        name = matcher.instance_variable_get(:@name).to_s.gsub(/_/, ' ')
-        with = " with #{matcher.expected}" if matcher.expected.any?
+        with = " with #{matcher.options}" if matcher.options.any?
 
-        expect(matcher.description).to eq "#{name} #{options}#{with}"
+        expect(matcher.description).to eq "have column #{options}#{with}"
       end
     end
 

@@ -76,7 +76,7 @@ shared_examples_for 'a validation matcher' do
   def self.with_unsupported_option(option_name, value=nil)
     context "with unsupported option #{option_name.inspect}" do
       it 'raises an error' do
-        expect { send(matcher_name, option_name => value) }
+        expect { should send(matcher_name, option_name => value) }
           .to raise_error ArgumentError, /unsupported.*:#{option_name}/i
       end
     end
@@ -87,7 +87,7 @@ shared_examples_for 'a validation matcher' do
 
     it 'has a custom description' do
       name = matcher.instance_variable_get(:@name).to_s.gsub(/_/, ' ')
-      with = " with #{matcher.expected}" if matcher.expected.any?
+      with = " with #{matcher.options}" if matcher.options.any?
 
       expect(matcher.description).to eq "#{name} #{attribute}#{with}"
     end
@@ -101,12 +101,12 @@ shared_examples_for 'a validation matcher' do
     end
 
     it 'has a custom failure message' do
-      expect(matcher.failure_message_for_should)
+      expect(matcher.failure_message)
         .to eq "Expected #{instance.class.name} to #{matcher.description}"
     end
 
     it 'has a custom negative failure message' do
-      expect(matcher.failure_message_for_should_not)
+      expect(matcher.failure_message_when_negated)
         .to eq "Did not expect #{instance.class.name} to #{matcher.description}"
     end
   end
@@ -123,7 +123,7 @@ shared_examples_for 'a validation matcher' do
 
   context 'with an unknown option' do
     it 'raises an error' do
-      expect { send(matcher_name, xxx: true) }
+      expect { should send(matcher_name, xxx: true) }
         .to raise_error ArgumentError, /unknown.*:xxx/i
     end
   end

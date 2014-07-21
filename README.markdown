@@ -9,7 +9,7 @@
 [rubygems]: http://badge.fury.io/rb/remockable
 [rubygems-image]: https://badge.fury.io/rb/remockable.png
 
-A collection of RSpec 2 matchers to simplify your web app specs.
+A collection of RSpec 3 matchers to simplify your web app specs.
 
 *Note:* Rails 3 support was dropped in version 0.2.
 

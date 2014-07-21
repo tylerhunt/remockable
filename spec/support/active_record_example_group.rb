@@ -13,6 +13,6 @@ module ActiveRecordExampleGroup
   end
 
   RSpec.configure do |config|
-    config.include self, example_group: { file_path: /spec\/active_record/ }
+    config.include self, file_path: /spec\/active_record/
   end
 end

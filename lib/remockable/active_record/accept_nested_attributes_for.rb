@@ -1,28 +1,25 @@
-RSpec::Matchers.define(:accept_nested_attributes_for) do |*association|
-  extend Remockable::ActiveRecord::Helpers
+RSpec::Matchers.define(:accept_nested_attributes_for) do
+  include Remockable::ActiveRecord::Helpers
 
-  @expected = association.extract_options!
-  @association = association.shift
-
-  unsupported_options %w(reject_if)
-  valid_options %w(allow_destroy limit update_only)
+  unsupported_options %i(reject_if)
+  valid_options %i(allow_destroy limit update_only)
 
   match do |actual|
-    if options = subject.class.nested_attributes_options[@association]
-      options.slice(*expected.keys) == expected
+    if actual_options = subject.class.nested_attributes_options[attribute]
+      actual_options.slice(*options.keys) == options
     end
   end
 
-  failure_message_for_should do |actual|
+  failure_message do |actual|
     "Expected #{subject.class.name} to #{description}"
   end
 
-  failure_message_for_should_not do |actual|
+  failure_message_when_negated do |actual|
     "Did not expect #{subject.class.name} to #{description}"
   end
 
   description do
-    with = " with #{expected.inspect}" if expected.any?
-    "accept nested attributes for #{@association}#{with}"
+    with = " with #{options.inspect}" if options.any?
+    "accept nested attributes for #{attribute}#{with}"
   end
 end

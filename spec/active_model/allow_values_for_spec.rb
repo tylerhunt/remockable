@@ -34,12 +34,12 @@ describe :allow_values_for do
     end
 
     it 'has a custom failure message' do
-      expect(matcher.failure_message_for_should)
+      expect(matcher.failure_message)
         .to eq "Expected #{instance.class.name} to #{matcher.description}"
     end
 
     it 'has a custom negative failure message' do
-      expect(matcher.failure_message_for_should_not)
+      expect(matcher.failure_message_when_negated)
         .to eq "Did not expect #{instance.class.name} to #{matcher.description}"
     end
   end

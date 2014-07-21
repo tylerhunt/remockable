@@ -19,11 +19,10 @@ describe :belong_to do
       let(:matcher) { send(matcher_name, *options) }
 
       it 'has a custom description' do
-        name = matcher.instance_variable_get(:@name).to_s.gsub(/_/, ' ')
-        association = matcher.instance_variable_get(:@association)
-        with = " with #{matcher.expected.inspect}" if matcher.expected.any?
+        association = matcher.attribute
+        with = " with #{matcher.options.inspect}" if matcher.options.any?
 
-        expect(matcher.description).to eq "#{name} #{association}#{with}"
+        expect(matcher.description).to eq "belong to #{association}#{with}"
       end
     end
 

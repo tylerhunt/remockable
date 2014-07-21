@@ -1,27 +1,30 @@
-RSpec::Matchers.define(:have_column) do |*column|
-  extend Remockable::ActiveRecord::Helpers
+RSpec::Matchers.define(:have_column) do
+  include Remockable::ActiveRecord::Helpers
 
-  @expected = column.extract_options!
-  @column = column.shift
+  valid_options %i(default limit null precision scale type)
 
-  valid_options %w(default limit null precision scale type)
+  def column
+    @column ||= subject.class.columns.detect { |column|
+      column.name == attribute.to_s
+    }
+  end
 
   match do |actual|
-    if column = subject.class.columns.detect { |column| column.name == @column.to_s }
-      @expected.all? { |key, value| column.send(key).should == value }
+    if column
+      options.all? { |key, value| column.send(key) == value }
     end
   end
 
-  failure_message_for_should do |actual|
+  failure_message do |actual|
     "Expected #{subject.class.name} to #{description}"
   end
 
-  failure_message_for_should_not do |actual|
+  failure_message_when_negated do |actual|
     "Did not expect #{subject.class.name} to #{description}"
   end
 
   description do
-    with = " with #{expected.inspect}" if expected.any?
-    "have column #{@column}#{with}"
+    with = " with #{options.inspect}" if options.any?
+    "have column #{attribute}#{with}"
   end
 end
