@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe :have_many do
   let(:macro) { :has_many }
   let(:options) { [:posts, { dependent: :destroy }] }

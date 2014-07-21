@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe :have_one do
   let(:macro) { :has_one }
   let(:options) { [:address, { dependent: :destroy }] }

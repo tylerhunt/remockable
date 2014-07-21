@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe :validate_uniqueness_of do
   let(:validator_name) { :uniqueness }
   let(:default_options) { { scope: :two } }

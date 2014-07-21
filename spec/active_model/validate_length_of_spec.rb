@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe :validate_length_of do
   let(:validator_name) { :length }
   let(:default_options) { { is: 5 } }

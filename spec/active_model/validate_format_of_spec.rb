@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe :validate_format_of do
   let(:validator_name) { :format }
   let(:default_options) { { with: /\d+/ } }

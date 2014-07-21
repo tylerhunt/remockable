@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe :validate_inclusion_of do
   let(:validator_name) { :inclusion }
   let(:default_options) { { in: [true, false] } }

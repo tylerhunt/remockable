@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe :have_index do
   let(:options) { :one }
 

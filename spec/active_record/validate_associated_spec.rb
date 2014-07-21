@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe :validate_associated do
   let(:validator_name) { :associated }
   let(:attribute) { :company }

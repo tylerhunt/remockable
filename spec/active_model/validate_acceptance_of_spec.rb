@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe :validate_acceptance_of do
   let(:validator_name) { :acceptance }
   let(:default_options) { true }

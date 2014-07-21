@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe :allow_values_for do
   let(:attribute) { :one }
   let(:values) { ['123'] }

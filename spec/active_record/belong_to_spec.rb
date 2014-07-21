@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe :belong_to do
   let(:macro) { :belongs_to }
   let(:options) { [:company, { dependent: :destroy }] }

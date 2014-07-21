@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe :validate_presence_of do
   let(:validator_name) { :presence }
   let(:default_options) { true }

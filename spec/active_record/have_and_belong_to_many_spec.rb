@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe :have_and_belong_to_many do
   let(:macro) { :has_and_belongs_to_many }
   let(:options) { [:tags, { validate: true }] }

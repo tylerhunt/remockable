@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe :validate_numericality_of do
   let(:validator_name) { :numericality }
   let(:default_options) { { only_integer: true } }

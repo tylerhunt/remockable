@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe :accept_nested_attributes_for do
   let(:macro) { :accepts_nested_attributes_for }
   let(:options) { [:company, { allow_destroy: true }] }
