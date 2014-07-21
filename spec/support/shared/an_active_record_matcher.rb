@@ -5,7 +5,9 @@ shared_examples_for 'an Active Record matcher' do
     context "with option #{option_name.inspect}" do
       let(:options) { [:company, context.merge(option_name => positive)] }
 
-      before { model.send(macro, *options) }
+      before do
+        model.send macro, *options
+      end
 
       it 'matches if the options match' do
         should send(matcher_name, :company, option_name => positive)
@@ -20,9 +22,8 @@ shared_examples_for 'an Active Record matcher' do
   def self.with_unsupported_option(option_name, value=nil)
     context "with unsupported option #{option_name.inspect}" do
       it 'raises an error' do
-        expect {
-          send(matcher_name, :company, option_name => value)
-        }.to raise_error(ArgumentError, /unsupported.*:#{option_name}/i)
+        expect { send(matcher_name, :company, option_name => value) }
+          .to raise_error ArgumentError, /unsupported.*:#{option_name}/i
       end
     end
   end
@@ -30,24 +31,25 @@ shared_examples_for 'an Active Record matcher' do
   context 'failure messages' do
     let(:matcher) { send(matcher_name, *options) }
 
-    before { matcher.matches?(subject) }
+    before do
+      matcher.matches? subject
+    end
 
     it 'has a custom failure message' do
-      matcher.failure_message_for_should.should ==
-        "Expected #{subject.class.name} to #{matcher.description}"
+      expect(matcher.failure_message_for_should)
+        .to eq "Expected #{subject.class.name} to #{matcher.description}"
     end
 
     it 'has a custom negative failure message' do
-      matcher.failure_message_for_should_not.should ==
-        "Did not expect #{subject.class.name} to #{matcher.description}"
+      expect(matcher.failure_message_for_should_not)
+        .to eq "Did not expect #{subject.class.name} to #{matcher.description}"
     end
   end
 
   context 'with an unknown option' do
     it 'raises an error' do
-      expect {
-        send(matcher_name, :xxx => true)
-      }.to raise_error(ArgumentError, /unknown.*:xxx/i)
+      expect { send(matcher_name, xxx: true) }
+        .to raise_error ArgumentError, /unknown.*:xxx/i
     end
   end
 end

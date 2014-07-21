@@ -2,16 +2,18 @@ require 'spec_helper'
 
 describe :have_and_belong_to_many do
   let(:macro) { :has_and_belongs_to_many }
-  let(:options) { [:tags, { :validate => true }] }
+  let(:options) { [:tags, { validate: true }] }
 
   it_behaves_like 'an Active Record matcher' do
     let(:model) { build_class(:User, ActiveRecord::Base) }
 
-    before do
-      create_table(:users) { |table| table.string(:name) }
-    end
+    subject(:instance) { model.new }
 
-    subject { model.new }
+    before do
+      create_table :users do |table|
+        table.string :name
+      end
+    end
 
     context 'description' do
       let(:matcher) { send(matcher_name, *options) }
@@ -19,7 +21,9 @@ describe :have_and_belong_to_many do
       it 'has a custom description' do
         association = matcher.instance_variable_get(:@association)
         with = " with #{matcher.expected.inspect}" if matcher.expected.any?
-        matcher.description.should == "have and belong to #{association}#{with}"
+
+        expect(matcher.description)
+          .to eq "have and belong to #{association}#{with}"
       end
     end
 
@@ -27,25 +31,25 @@ describe :have_and_belong_to_many do
       let(:options) { :tags }
 
       it 'matches if the association exists' do
-        model.has_and_belongs_to_many(*options)
-        model.should have_and_belong_to_many(*options)
+        model.has_and_belongs_to_many *options
+        expect(model).to have_and_belong_to_many *options
       end
 
       it 'does not match if the association does not exist' do
-        model.should_not have_and_belong_to_many(*options)
+        expect(model).to_not have_and_belong_to_many *options
       end
 
       it 'does not match if the association is of the wrong type' do
-        model.has_many(*options)
-        model.should_not have_and_belong_to_many(*options)
+        model.has_many *options
+        expect(model).to_not have_and_belong_to_many *options
       end
     end
 
-    with_option(:class_name, 'Tag', 'Role')
-    with_option(:join_table, 'tags_users', 'user_tags')
-    with_option(:foreign_key, :user_id, :tagged_id)
-    with_option(:association_foreign_key, :tag_id, :role_id)
-    with_option(:validate, true, false)
-    with_option(:autosave, true, false)
+    with_option :class_name, 'Tag', 'Role'
+    with_option :join_table, 'tags_users', 'user_tags'
+    with_option :foreign_key, :user_id, :tagged_id
+    with_option :association_foreign_key, :tag_id, :role_id
+    with_option :validate, true, false
+    with_option :autosave, true, false
   end
 end

@@ -2,16 +2,16 @@ require 'spec_helper'
 
 describe :have_many do
   let(:macro) { :has_many }
-  let(:options) { [:posts, { :dependent => :destroy }] }
+  let(:options) { [:posts, { dependent: :destroy }] }
 
   it_behaves_like 'an Active Record matcher' do
     let(:model) { build_class(:User, ActiveRecord::Base) }
 
+    subject(:instance) { model.new }
+
     before do
       create_table(:users) { |table| table.string(:name) }
     end
-
-    subject { model.new }
 
     context 'description' do
       let(:matcher) { send(matcher_name, *options) }
@@ -19,7 +19,8 @@ describe :have_many do
       it 'has a custom description' do
         association = matcher.instance_variable_get(:@association)
         with = " with #{matcher.expected.inspect}" if matcher.expected.any?
-        matcher.description.should == "have many #{association}#{with}"
+
+        expect(matcher.description).to eq "have many #{association}#{with}"
       end
     end
 
@@ -28,16 +29,16 @@ describe :have_many do
 
       it 'matches if the association exists' do
         model.has_many(*options)
-        model.should have_many(*options)
+        expect(model).to have_many(*options)
       end
 
       it 'does not match if the association does not exist' do
-        model.should_not have_many(*options)
+        expect(model).to_not have_many(*options)
       end
 
       it 'does not match if the association is of the wrong type' do
         model.belongs_to(*options)
-        model.should_not have_many(*options)
+        expect(model).to_not have_many(*options)
       end
     end
 

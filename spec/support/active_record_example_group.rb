@@ -6,14 +6,13 @@ module ActiveRecordExampleGroup
 
     before do
       ActiveRecord::Base.establish_connection(
-        :adapter => 'sqlite3',
-        :database => ':memory:'
+        adapter: 'sqlite3',
+        database: ':memory:'
       )
     end
   end
 
   RSpec.configure do |config|
-    config.include self,
-      :example_group => { :file_path => /spec\/active_record/ }
+    config.include self, example_group: { file_path: /spec\/active_record/ }
   end
 end

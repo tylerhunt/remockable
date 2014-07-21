@@ -5,34 +5,42 @@ describe :allow_values_for do
   let(:values) { ['123'] }
   let(:matcher_name) { self.class.parent.description }
 
-  let(:model) do
-    build_class(:User) { include ActiveModel::Validations }
+  let(:model) {
+    build_class :User do
+      include ActiveModel::Validations
+    end
+  }
+
+  subject(:instance) { model.new }
+
+  before do
+    model.validates attribute, format: /\A\d+\Z/
   end
-
-  before { model.validates(attribute, :format => /\A\d+\Z/) }
-
-  subject { model.new }
 
   context 'description' do
     it 'has a custom description' do
       matcher = allow_values_for(attribute, *values)
-      matcher.description.should == "allow the values #{values.collect(&:inspect).to_sentence} for #{attribute}"
+
+      expect(matcher.description)
+        .to eq "allow the values #{values.collect(&:inspect).to_sentence} for #{attribute}"
     end
   end
 
   context 'failure messages' do
     let(:matcher) { allow_values_for(attribute, *values) }
 
-    before { matcher.matches?(subject) }
+    before do
+      matcher.matches? instance
+    end
 
     it 'has a custom failure message' do
-      matcher.failure_message_for_should.should ==
-        "Expected #{subject.class.name} to #{matcher.description}"
+      expect(matcher.failure_message_for_should)
+        .to eq "Expected #{instance.class.name} to #{matcher.description}"
     end
 
     it 'has a custom negative failure message' do
-      matcher.failure_message_for_should_not.should ==
-        "Did not expect #{subject.class.name} to #{matcher.description}"
+      expect(matcher.failure_message_for_should_not)
+        .to eq "Did not expect #{instance.class.name} to #{matcher.description}"
     end
   end
 

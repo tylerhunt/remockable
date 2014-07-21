@@ -3,25 +3,25 @@ shared_examples_for 'a validation matcher' do
   let(:options) { default_options }
   let(:matcher_name) { self.class.parent.parent.description }
 
-  let(:model) do
-    build_class(:User) do
+  let(:model) {
+    build_class :User do
       include ActiveModel::Validations
     end
-  end
+  }
+
+  subject(:instance) { model.new }
 
   before do
-    model.validates(attribute, validator_name => options)
+    model.validates attribute, validator_name => options
   end
-
-  subject { model.new }
 
   def self.with_option(option_name, positive, negative, exclusive=false)
     context "with option #{option_name.inspect}" do
-      let(:options) do
+      let(:options) {
         option = { option_name => positive }
         merge_with_default = !exclusive && default_options.is_a?(Hash)
         merge_with_default ? default_options.merge(option) : option
-      end
+      }
 
       it 'matches if the options match' do
         should send(matcher_name, attribute, option_name => positive)
@@ -34,7 +34,7 @@ shared_examples_for 'a validation matcher' do
   end
 
   def self.with_option!(option_name, positive, negative)
-    with_option(option_name, positive, negative, true)
+    with_option option_name, positive, negative, true
   end
 
   def self.with_conditional_option(option_name)
@@ -54,7 +54,7 @@ shared_examples_for 'a validation matcher' do
     end
 
     context "with option #{option_name.inspect} with a procedure" do
-      let(:procedure) { lambda { |record| record.skip_validations } }
+      let(:procedure) { ->(record) { record.skip_validations } }
 
       let(:options) {
         option = { option_name => procedure }
@@ -62,12 +62,12 @@ shared_examples_for 'a validation matcher' do
       }
 
       it 'matches if the options match' do
-        subject.stub(:skip_validations).and_return(true)
+        allow(instance).to receive(:skip_validations).and_return(true)
         should send(matcher_name, attribute, option_name => true)
       end
 
       it 'does not match if the options do not match' do
-        subject.stub(:skip_validations).and_return(false)
+        allow(instance).to receive(:skip_validations).and_return(false)
         should_not send(matcher_name, attribute, option_name => true)
       end
     end
@@ -76,9 +76,8 @@ shared_examples_for 'a validation matcher' do
   def self.with_unsupported_option(option_name, value=nil)
     context "with unsupported option #{option_name.inspect}" do
       it 'raises an error' do
-        expect {
-          send(matcher_name, option_name => value)
-        }.to raise_error(ArgumentError, /unsupported.*:#{option_name}/i)
+        expect { send(matcher_name, option_name => value) }
+          .to raise_error ArgumentError, /unsupported.*:#{option_name}/i
       end
     end
   end
@@ -90,23 +89,25 @@ shared_examples_for 'a validation matcher' do
       name = matcher.instance_variable_get(:@name).to_s.gsub(/_/, ' ')
       with = " with #{matcher.expected}" if matcher.expected.any?
 
-      matcher.description.should == "#{name} #{attribute}#{with}"
+      expect(matcher.description).to eq "#{name} #{attribute}#{with}"
     end
   end
 
   context 'failure messages' do
     let(:matcher) { send(matcher_name, attribute) }
 
-    before { matcher.matches?(subject) }
+    before do
+      matcher.matches?(instance)
+    end
 
     it 'has a custom failure message' do
-      matcher.failure_message_for_should.should ==
-        "Expected #{subject.class.name} to #{matcher.description}"
+      expect(matcher.failure_message_for_should)
+        .to eq "Expected #{instance.class.name} to #{matcher.description}"
     end
 
     it 'has a custom negative failure message' do
-      matcher.failure_message_for_should_not.should ==
-        "Did not expect #{subject.class.name} to #{matcher.description}"
+      expect(matcher.failure_message_for_should_not)
+        .to eq "Did not expect #{instance.class.name} to #{matcher.description}"
     end
   end
 
@@ -122,9 +123,8 @@ shared_examples_for 'a validation matcher' do
 
   context 'with an unknown option' do
     it 'raises an error' do
-      expect {
-        send(matcher_name, :xxx => true)
-      }.to raise_error(ArgumentError, /unknown.*:xxx/i)
+      expect { send(matcher_name, xxx: true) }
+        .to raise_error ArgumentError, /unknown.*:xxx/i
     end
   end
 end

@@ -6,11 +6,11 @@ describe :have_column do
   it_behaves_like 'an Active Record matcher' do
     let(:model) { build_class(:User, ActiveRecord::Base) }
 
-    before do
-      create_table(:users) { |table| }
-    end
+    subject(:instance) { model.new }
 
-    subject { model.new }
+    before do
+      create_table :users
+    end
 
     context 'description' do
       let(:matcher) { send(matcher_name, *options) }
@@ -19,90 +19,90 @@ describe :have_column do
         name = matcher.instance_variable_get(:@name).to_s.gsub(/_/, ' ')
         with = " with #{matcher.expected}" if matcher.expected.any?
 
-        matcher.description.should == "#{name} #{options}#{with}"
+        expect(matcher.description).to eq "#{name} #{options}#{with}"
       end
     end
 
     context 'with a column' do
       it 'matches if the column exists' do
-        ActiveRecord::Base.connection.add_column(:users, :one, :string)
-        model.should have_column(:one)
+        ActiveRecord::Base.connection.add_column :users, :one, :string
+        expect(model).to have_column :one
       end
 
       it 'does not match if the column does not exist' do
-        model.should_not have_column(:one)
+        expect(model).to_not have_column :one
       end
     end
 
     context 'with option :default' do
       it 'matches if the column exists' do
-        ActiveRecord::Base.connection.add_column(:users, :one, :integer, :default => 1)
-        model.should have_column(:one, :default => 1)
+        ActiveRecord::Base.connection.add_column :users, :one, :integer, default: 1
+        expect(model).to have_column :one, default: 1
       end
 
       it 'does not match if the column does not have the same default' do
-        ActiveRecord::Base.connection.add_column(:users, :one, :integer, :default => 2)
-        model.should_not have_column(:one, :default => 1)
+        ActiveRecord::Base.connection.add_column :users, :one, :integer, default: 2
+        expect(model).to_not have_column :one, default: 1
       end
     end
 
     context 'with option :limit' do
       it 'matches if the column exists' do
-        ActiveRecord::Base.connection.add_column(:users, :one, :string, :limit => 10)
-        model.should have_column(:one, :limit => 10)
+        ActiveRecord::Base.connection.add_column :users, :one, :string, limit: 10
+        expect(model).to have_column :one, limit: 10
       end
 
       it 'does not match if the column does not have the same limit' do
-        ActiveRecord::Base.connection.add_column(:users, :one, :string, :limit => 5)
-        model.should_not have_column(:one, :limit => 10)
+        ActiveRecord::Base.connection.add_column :users, :one, :string, limit: 5
+        expect(model).to_not have_column :one, limit: 10
       end
     end
 
     context 'with option :null' do
       it 'matches if the column exists' do
-        ActiveRecord::Base.connection.add_column(:users, :one, :integer, :null => false, :default => 1)
-        model.should have_column(:one, :null => false)
+        ActiveRecord::Base.connection.add_column :users, :one, :integer, null: false, default: 1
+        expect(model).to have_column :one, null: false
       end
 
       it 'does not match if the column does not have the same null' do
-        ActiveRecord::Base.connection.add_column(:users, :one, :integer)
-        model.should_not have_column(:one, :null => false)
+        ActiveRecord::Base.connection.add_column :users, :one, :integer
+        expect(model).to_not have_column :one, null: false
       end
     end
 
     context 'with option :precision' do
       it 'matches if the column exists' do
-        ActiveRecord::Base.connection.add_column(:users, :one, :decimal, :precision => 8)
-        model.should have_column(:one, :precision => 8)
+        ActiveRecord::Base.connection.add_column :users, :one, :decimal, precision: 8
+        expect(model).to have_column :one, precision: 8
       end
 
       it 'does not match if the column does not have the same null' do
-        ActiveRecord::Base.connection.add_column(:users, :one, :decimal, :precision => 8)
-        model.should_not have_column(:one, :precision => 5)
+        ActiveRecord::Base.connection.add_column :users, :one, :decimal, precision: 8
+        expect(model).to_not have_column :one, precision: 5
       end
     end
 
     context 'with option :scale' do
       it 'matches if the column exists' do
-        ActiveRecord::Base.connection.add_column(:users, :one, :decimal, :precision => 8, :scale => 2)
-        model.should have_column(:one, :scale => 2)
+        ActiveRecord::Base.connection.add_column :users, :one, :decimal, precision: 8, scale: 2
+        expect(model).to have_column :one, scale: 2
       end
 
       it 'does not match if the column does not have the same null' do
-        ActiveRecord::Base.connection.add_column(:users, :one, :decimal, :precision => 8, :scale => 2)
-        model.should_not have_column(:one, :scale => 3)
+        ActiveRecord::Base.connection.add_column :users, :one, :decimal, precision: 8, scale: 2
+        expect(model).to_not have_column :one, scale: 3
       end
     end
 
     context 'with option :type' do
       it 'matches if the column exists' do
-        ActiveRecord::Base.connection.add_column(:users, :one, :integer)
-        model.should have_column(:one, :type => :integer)
+        ActiveRecord::Base.connection.add_column :users, :one, :integer
+        expect(model).to have_column :one, type: :integer
       end
 
       it 'does not match if the column does not have the same type' do
-        ActiveRecord::Base.connection.add_column(:users, :one, :string)
-        model.should_not have_column(:one, :type => :integer)
+        ActiveRecord::Base.connection.add_column :users, :one, :string
+        expect(model).to_not have_column :one, type: :integer
       end
     end
   end
