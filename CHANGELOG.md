@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.3.0 (2014-07-21)
 
   * Support and require RSpec ~> 3.0 ([Tyler Hunt][tylerhunt])
   * Improve documentation ([Olivier Lacan][olivierlacan])
