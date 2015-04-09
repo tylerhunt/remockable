@@ -50,7 +50,7 @@ RSpec::Matchers.define(:have_scope) do |*name|
       reorder
       select
       where
-    ).map(&:to_sym)
+    ).collect(&:to_sym)
 
     if query_methods.include?(method)
       self.relation ||= subject.class.all
