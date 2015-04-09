@@ -3,7 +3,7 @@ RSpec::Matchers.define(:have_default_scope) do
 
   attr_accessor :relation
 
-  valid_options %i()
+  valid_options []
 
   match do |actual|
     if subject.class.respond_to?(:all)
@@ -29,7 +29,7 @@ RSpec::Matchers.define(:have_default_scope) do
   end
 
   def method_missing(method, *args, &block)
-    unsupported_query_methods = %i(
+    unsupported_query_methods = %w(
       create_with
       eager_load
       includes
@@ -38,7 +38,7 @@ RSpec::Matchers.define(:have_default_scope) do
       readonly
     )
 
-    query_methods = %i(
+    query_methods = %w(
       from
       group
       having
@@ -49,7 +49,7 @@ RSpec::Matchers.define(:have_default_scope) do
       reorder
       select
       where
-    )
+    ).map(&:to_sym)
 
     if query_methods.include?(method)
       self.relation ||= subject.class.unscoped

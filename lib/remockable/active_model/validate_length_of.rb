@@ -3,9 +3,9 @@ RSpec::Matchers.define(:validate_length_of) do
 
   type :length
 
-  unsupported_options %i(tokenizer)
+  unsupported_options %w(tokenizer)
 
-  valid_options %i(
+  valid_options %w(
     allow_blank
     allow_nil
     if

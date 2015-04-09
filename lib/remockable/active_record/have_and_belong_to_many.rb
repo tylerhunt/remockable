@@ -1,7 +1,7 @@
 RSpec::Matchers.define(:have_and_belong_to_many) do
   include Remockable::ActiveRecord::Helpers
 
-  valid_options %i(
+  valid_options %w(
     association_foreign_key
     autosave
     class_name

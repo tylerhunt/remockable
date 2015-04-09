@@ -1,8 +1,8 @@
 RSpec::Matchers.define(:accept_nested_attributes_for) do
   include Remockable::ActiveRecord::Helpers
 
-  unsupported_options %i(reject_if)
-  valid_options %i(allow_destroy limit update_only)
+  unsupported_options %w(reject_if)
+  valid_options %w(allow_destroy limit update_only)
 
   match do |actual|
     if actual_options = subject.class.nested_attributes_options[attribute]

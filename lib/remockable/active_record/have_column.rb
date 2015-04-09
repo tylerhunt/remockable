@@ -1,7 +1,7 @@
 RSpec::Matchers.define(:have_column) do
   include Remockable::ActiveRecord::Helpers
 
-  valid_options %i(default limit null precision scale type)
+  valid_options %w(default limit null precision scale type)
 
   def column
     @column ||= subject.class.columns.detect { |column|

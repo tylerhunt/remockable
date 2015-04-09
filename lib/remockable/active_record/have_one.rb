@@ -1,7 +1,7 @@
 RSpec::Matchers.define(:have_one) do
   include Remockable::ActiveRecord::Helpers
 
-  valid_options %i(
+  valid_options %w(
     class_name
     dependent
     foreign_key

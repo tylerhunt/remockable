@@ -3,7 +3,7 @@ RSpec::Matchers.define(:validate_inclusion_of) do
 
   type :inclusion
 
-  valid_options %i(allow_nil allow_blank if in message on unless)
+  valid_options %w(allow_nil allow_blank if in message on unless)
 
   match do |actual|
     validator = validator_for(attribute)

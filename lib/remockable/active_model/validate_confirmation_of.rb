@@ -3,7 +3,7 @@ RSpec::Matchers.define(:validate_confirmation_of) do
 
   type :confirmation
 
-  valid_options %i(if message on unless)
+  valid_options %w(if message on unless)
 
   match do |actual|
     validator = validator_for(attribute)

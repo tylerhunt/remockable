@@ -5,7 +5,7 @@ RSpec::Matchers.define :validate_uniqueness_of do |expected|
 
   type :uniqueness
 
-  valid_options %i(
+  valid_options %w(
     allow_blank
     allow_nil
     case_sensitive
