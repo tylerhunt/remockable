@@ -1,7 +1,7 @@
 RSpec::Matchers.define(:have_many) do
   include Remockable::ActiveRecord::Helpers
 
-  valid_options %i(
+  valid_options %w(
     as
     autosave
     class_name

@@ -3,7 +3,7 @@ RSpec::Matchers.define(:validate_numericality_of) do
 
   type :numericality
 
-  valid_options %i(
+  valid_options %w(
     allow_nil
     equal_to
     even

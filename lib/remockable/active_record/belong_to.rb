@@ -1,7 +1,7 @@
 RSpec::Matchers.define(:belong_to) do
   include Remockable::ActiveRecord::Helpers
 
-  valid_options %i(
+  valid_options %w(
     autosave
     class_name
     counter_cache

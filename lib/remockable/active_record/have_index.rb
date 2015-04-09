@@ -1,7 +1,7 @@
 RSpec::Matchers.define(:have_index) do
   include Remockable::ActiveRecord::Helpers
 
-  valid_options %i(name unique)
+  valid_options %w(name unique)
 
   def column_names
     @column_names ||= expected_as_array.flatten.collect(&:to_s)

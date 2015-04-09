@@ -13,13 +13,13 @@ module Remockable
 
       def unsupported_options(keys)
         define_method :unsupported_options do
-          keys
+          keys.map(&:to_sym)
         end
       end
 
       def valid_options(keys)
         define_method :valid_options do
-          keys
+          keys.map(&:to_sym)
         end
       end
     end
