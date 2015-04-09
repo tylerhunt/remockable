@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+  * Restore support for Ruby 1.9 ([Nathaniel Bibler][nbibler])
+
 ## 0.3.0 (2014-07-21)
 
   * Support and require RSpec ~> 3.0 ([Tyler Hunt][tylerhunt])
@@ -91,3 +95,4 @@
 [jswanner]: https://github.com/jswanner
 [olivierlacan]: https://github.com/olivierlacan
 [tylerhunt]: https://github.com/tylerhunt
+[nbibler]: https://github.com/nbibler
