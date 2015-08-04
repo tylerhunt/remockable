@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+  * Fix circular reference error in Ruby 2.2 ([Nathaniel Bibler][nbibler])
   * Restore support for Ruby 1.9 ([Nathaniel Bibler][nbibler])
 
 ## 0.3.0 (2014-07-21)
