@@ -16,7 +16,7 @@ module Remockable
         end
       end
 
-      def options_match(validator, options=options)
+      def options_match(validator, options=self.options)
         actual = validator.options.slice(*(options.keys - CONDITIONALS))
         actual == options.except(*CONDITIONALS)
       end
