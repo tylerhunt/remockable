@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.3.1 (2015-10-09)
 
   * Fix circular reference error in Ruby 2.2 ([Nathaniel Bibler][nbibler])
   * Restore support for Ruby 1.9 ([Nathaniel Bibler][nbibler])
