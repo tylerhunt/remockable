@@ -9,9 +9,18 @@ RSpec::Matchers.define(:have_column) do
     }
   end
 
+  def column_values_match?(key, value)
+    case key
+    when :default
+      subject.class.column_defaults[column.name] == value
+    else
+      column.send(key) == value
+    end
+  end
+
   match do |actual|
     if column
-      options.all? { |key, value| column.send(key) == value }
+      options.all? { |key, value| column_values_match?(key, value) }
     end
   end
 
