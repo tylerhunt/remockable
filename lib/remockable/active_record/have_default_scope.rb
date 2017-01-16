@@ -11,7 +11,7 @@ RSpec::Matchers.define(:have_default_scope) do
 
       if scope.is_a?(ActiveRecord::Relation)
         if relation
-          query_matches = scope.arel.to_sql == relation.arel.to_sql
+          query_matches = scope.to_sql == relation.to_sql
           eager_load_matches = scope.eager_load_values == relation.eager_load_values
           includes_matches = scope.includes_values == relation.includes_values
           lock_matches = scope.lock_value == relation.lock_value

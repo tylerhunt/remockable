@@ -35,14 +35,30 @@ describe :have_scope do
     end
 
     context 'with an eager_load value' do
+      let(:comment_model) { build_class(:Comment, ActiveRecord::Base) }
+      let(:post_model) { build_class(:Post, ActiveRecord::Base) }
+
+      before do
+        create_table :comments do |table|
+          table.integer :user_id
+        end
+
+        create_table :posts do |table|
+          table.integer :user_id
+        end
+
+        model.has_many :comments, anonymous_class: comment_model
+        model.has_many :posts, anonymous_class: post_model
+      end
+
       it 'matches if the scope exists and the query matches' do
-        model.instance_eval { scope :loaded, -> { eager_load :order } }
-        expect(model).to have_scope(:loaded).eager_load(:order)
+        model.instance_eval { scope :loaded, -> { eager_load :posts } }
+        expect(model).to have_scope(:loaded).eager_load(:posts)
       end
 
       it 'does not match if the query does not match' do
-        model.instance_eval { scope :loaded, -> { eager_load :order } }
-        expect(model).to_not have_scope(:loaded).eager_load(:from)
+        model.instance_eval { scope :loaded, -> { eager_load :posts } }
+        expect(model).to_not have_scope(:loaded).eager_load(:comments)
       end
     end
 

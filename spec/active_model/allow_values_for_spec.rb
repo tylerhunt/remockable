@@ -6,6 +6,8 @@ describe :allow_values_for do
   let(:model) {
     build_class :User do
       include ActiveModel::Validations
+
+      attr_accessor :one
     end
   }
 

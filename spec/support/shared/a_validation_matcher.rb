@@ -54,6 +54,12 @@ shared_examples_for 'a validation matcher' do
     end
 
     context "with option #{option_name.inspect} with a procedure" do
+      before do
+        model.class_eval do
+          define_method(:skip_validations) {}
+        end
+      end
+
       let(:procedure) { ->(record) { record.skip_validations } }
 
       let(:options) {

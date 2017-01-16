@@ -11,7 +11,13 @@ RSpec::Matchers.define(:have_column) do
 
   match do |actual|
     if column
-      options.all? { |key, value| column.send(key) == value }
+      options.all? { |key, value|
+        if key == :default
+          column.send(key) == value.to_s # SQLite3 uses string for default
+        else
+          column.send(key) == value
+        end
+      }
     end
   end
 
