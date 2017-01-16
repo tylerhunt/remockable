@@ -53,5 +53,11 @@ describe :belong_to do
     with_option :autosave, true, false
     with_option :touch, true, false
     with_option :inverse_of, :users, :employees
+
+    if ActiveRecord.version > Gem::Version.new('5.0')
+      with_option :optional, true, false
+    else
+      with_option :required, true, false
+    end
   end
 end

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.3 (Unreleased)
+
+  * Add `:required`/`:optional` to `belong_to` ([Tyler Hunt][tylerhunt])
+
 ## 0.3.2 (2017-01-16)
 
   * Support Rails 5.0 ([Tyler Hunt][tylerhunt])

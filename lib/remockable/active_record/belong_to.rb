@@ -9,8 +9,10 @@ RSpec::Matchers.define(:belong_to) do
     foreign_key
     foreign_type
     inverse_of
+    optional
     polymorphic
     primary_key
+    required
     touch
     validate
   )
