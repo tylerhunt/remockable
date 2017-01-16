@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.2 (2017-01-16)
+
+  * Support Rails 5.0 ([Tyler Hunt][tylerhunt])
+
 ## 0.3.1 (2015-10-09)
 
   * Fix circular reference error in Ruby 2.2 ([Nathaniel Bibler][nbibler])
