@@ -5,3 +5,4 @@
 Gemfile.lock
 bin
 pkg
+spec/examples.txt
