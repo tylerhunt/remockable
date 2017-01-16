@@ -4,9 +4,7 @@ RSpec::Matchers.define(:have_column) do
   valid_options %w(default limit null precision scale type)
 
   def column
-    @column ||= subject.class.columns.detect { |column|
-      column.name == attribute.to_s
-    }
+    @column ||= subject.class.columns_hash[attribute.to_s]
   end
 
   match do |actual|
