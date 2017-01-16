@@ -1,7 +1,7 @@
 PATH
   remote: ../
   specs:
-    remockable (0.3.1)
+    remockable (0.3.2)
       activemodel (>= 4.0, < 5.1)
       activerecord (>= 4.0, < 5.1)
       activesupport (>= 4.0, < 5.1)
