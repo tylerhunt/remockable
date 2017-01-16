@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.3.3 (Unreleased)
+## 0.3.3 (2017-01-16)
 
   * Add `:required`/`:optional` to `belong_to` ([Tyler Hunt][tylerhunt])
 
