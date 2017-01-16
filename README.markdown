@@ -4,7 +4,7 @@
 
 [travis]: https://travis-ci.org/tylerhunt/remockable
 [travis-image]: https://travis-ci.org/tylerhunt/remockable.svg?branch=master
-[gemnasium]: https://gemnasium.com/github.com/tylerhunt/remockableu
+[gemnasium]: https://gemnasium.com/github.com/tylerhunt/remockable
 [gemnasium-image]: https://gemnasium.com/badges/github.com/tylerhunt/remockable.svg
 [rubygems]: https://badge.fury.io/rb/remockable
 [rubygems-image]: https://badge.fury.io/rb/remockable.svg
