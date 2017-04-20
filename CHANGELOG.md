@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased (2017-04-20)
+## 0.3.4 (2017-04-20)
 
   * Fix `allow_values_for` matcher ([Tyler Hunt][tylerhunt])
   * Update `allow_values_for` to use the setter on the object if defined
