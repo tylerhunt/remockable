@@ -3,6 +3,8 @@
 ## Unreleased (2017-04-20)
 
   * Fix `allow_values_for` matcher ([Tyler Hunt][tylerhunt])
+  * Update `allow_values_for` to use the setter on the object if defined
+    ([Tyler Hunt][tylerhunt])
 
 ## 0.3.3 (2017-01-16)
 

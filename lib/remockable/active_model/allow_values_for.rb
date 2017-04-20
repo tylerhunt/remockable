@@ -7,7 +7,12 @@ RSpec::Matchers.define(:allow_values_for) do
 
   match do |actual|
     values.all? do |value|
-      allow(subject).to receive(attribute).and_return(value)
+      if subject.respond_to?(:"#{attribute}=")
+        subject.send(:"#{attribute}=", value)
+      else
+        allow(subject).to receive(attribute).and_return(value)
+      end
+
       subject.valid?
       subject.errors[attribute].empty?
     end
