@@ -1,5 +1,7 @@
 language: ruby
+cache: bundler
 script: bundle exec rspec
+sudo: false
 
 gemfile:
   - gemfiles/rails_4.2.gemfile
