@@ -1,4 +1,6 @@
-RSpec::Matchers.define(:allow_values_for) do |*attribute_and_values|
+RSpec::Matchers.define(:allow_values_for) do
+  include Remockable::ActiveModel::Helpers
+
   def values
     expected_as_array[1..-1]
   end

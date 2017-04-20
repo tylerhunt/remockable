@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased (2017-04-20)
+
+  * Fix `allow_values_for` matcher ([Tyler Hunt][tylerhunt])
+
 ## 0.3.3 (2017-01-16)
 
   * Add `:required`/`:optional` to `belong_to` ([Tyler Hunt][tylerhunt])
