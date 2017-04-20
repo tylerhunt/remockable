@@ -54,6 +54,7 @@ classes.
 
 The following Active Model matchers are supported:
 
+  * `allow_values_for`
   * `validate_acceptance_of`
   * `validate_confirmation_of`
   * `validate_exclusion_of`
