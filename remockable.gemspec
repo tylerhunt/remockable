@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.homepage = 'http://github.com/tylerhunt/remockable'
   spec.license = 'MIT'
 
-  spec.add_dependency 'activemodel', '>= 4.0', '< 5.1'
-  spec.add_dependency 'activerecord', '>= 4.0', '< 5.1'
-  spec.add_dependency 'activesupport', '>= 4.0', '< 5.1'
+  spec.add_dependency 'activemodel', '>= 4.0', '< 5.2'
+  spec.add_dependency 'activerecord', '>= 4.0', '< 5.2'
+  spec.add_dependency 'activesupport', '>= 4.0', '< 5.2'
   spec.add_dependency 'rspec-core', '~> 3.0'
   spec.add_dependency 'rspec-expectations', '~> 3.0'
   spec.add_dependency 'rspec-mocks', '~> 3.0'

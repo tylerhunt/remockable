@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+  * Support Rails 5.1 ([Tyler Hunt][tylerhunt])
+
 ## 0.3.4 (2017-04-20)
 
   * Fix `allow_values_for` matcher ([Tyler Hunt][tylerhunt])
