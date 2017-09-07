@@ -32,8 +32,6 @@ RSpec::Matchers.define(:have_scope) do |*name|
   end
 
   def method_missing(method, *args, &block)
-    unsupported_query_methods = %w(create_with)
-
     query_methods = %w(
       eager_load
       from

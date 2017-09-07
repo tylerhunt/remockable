@@ -28,17 +28,17 @@ describe :belong_to do
       let(:options) { :company }
 
       it 'matches if the association exists' do
-        model.belongs_to *options
-        expect(model).to belong_to *options
+        model.belongs_to(*options)
+        expect(model).to belong_to(*options)
       end
 
       it 'does not match if the association does not exist' do
-        expect(model).to_not belong_to *options
+        expect(model).to_not belong_to(*options)
       end
 
       it 'does not match if the association is of the wrong type' do
-        model.has_many *options
-        expect(model).to_not belong_to *options
+        model.has_many(*options)
+        expect(model).to_not belong_to(*options)
       end
     end
 

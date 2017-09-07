@@ -29,17 +29,17 @@ describe :have_and_belong_to_many do
       let(:options) { :tags }
 
       it 'matches if the association exists' do
-        model.has_and_belongs_to_many *options
-        expect(model).to have_and_belong_to_many *options
+        model.has_and_belongs_to_many(*options)
+        expect(model).to have_and_belong_to_many(*options)
       end
 
       it 'does not match if the association does not exist' do
-        expect(model).to_not have_and_belong_to_many *options
+        expect(model).to_not have_and_belong_to_many(*options)
       end
 
       it 'does not match if the association is of the wrong type' do
-        model.has_many *options
-        expect(model).to_not have_and_belong_to_many *options
+        model.has_many(*options)
+        expect(model).to_not have_and_belong_to_many(*options)
       end
     end
 
