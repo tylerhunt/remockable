@@ -1,9 +1,8 @@
 # Changelog
 
-## Unreleased
+## 0.3.6 (2018-05-07)
 
   * Support Rails 5.2 ([Tyler Hunt][tylerhunt])
-
 
 ## 0.3.5 (2017-06-27)
 
