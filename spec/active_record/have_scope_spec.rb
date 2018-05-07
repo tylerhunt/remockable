@@ -52,13 +52,13 @@ describe :have_scope do
       end
 
       it 'matches if the scope exists and the query matches' do
-        model.instance_eval { scope :loaded, -> { eager_load :posts } }
-        expect(model).to have_scope(:loaded).eager_load(:posts)
+        model.instance_eval { scope :eager_loaded, -> { eager_load :posts } }
+        expect(model).to have_scope(:eager_loaded).eager_load(:posts)
       end
 
       it 'does not match if the query does not match' do
-        model.instance_eval { scope :loaded, -> { eager_load :posts } }
-        expect(model).to_not have_scope(:loaded).eager_load(:comments)
+        model.instance_eval { scope :eager_loaded, -> { eager_load :posts } }
+        expect(model).to_not have_scope(:eager_loaded).eager_load(:comments)
       end
     end
 
