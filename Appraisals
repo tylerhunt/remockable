@@ -15,3 +15,9 @@ appraise 'rails-5.1' do
   gem 'activerecord', '~> 5.1'
   gem 'activesupport', '~> 5.1'
 end
+
+appraise 'rails-5.2' do
+  gem 'activemodel', '~> 5.2'
+  gem 'activerecord', '~> 5.2'
+  gem 'activesupport', '~> 5.2'
+end

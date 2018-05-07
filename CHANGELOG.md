@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+  * Support Rails 5.2 ([Tyler Hunt][tylerhunt])
+
+
 ## 0.3.5 (2017-06-27)
 
   * Support Rails 5.1 ([Tyler Hunt][tylerhunt])
