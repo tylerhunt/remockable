@@ -1,7 +1,13 @@
 describe :allow_values_for do
   let(:attribute) { :one }
   let(:values) { ['123'] }
-  let(:matcher_name) { self.class.parent.description }
+  let(:matcher_name) do 
+    if self.class.respond_to?(:module_parent)
+      self.class.module_parent.description
+    else
+      self.class.parent.description
+    end
+  end
 
   let(:model) {
     build_class :User do

@@ -1,12 +1,18 @@
 shared_examples_for 'an Active Record matcher' do
-  let(:matcher_name) { self.class.parent.parent.description }
+  let(:matcher_name) do 
+    if self.class.respond_to?(:module_parent)
+      self.class.module_parent.module_parent.description
+    else
+      self.class.parent.parent.description
+    end
+  end
 
   def self.with_option(option_name, positive, negative, context={})
     context "with option #{option_name.inspect}" do
-      let(:options) { [:company, context.merge(option_name => positive)] }
+      let(:options) { context.merge(option_name => positive) }
 
       before do
-        model.send macro, *options
+        model.send macro, :company, **options
       end
 
       it 'matches if the options match' do

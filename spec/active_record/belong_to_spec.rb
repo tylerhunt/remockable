@@ -44,7 +44,7 @@ describe :belong_to do
 
     with_option :class_name, 'Company', 'Organization'
     with_option :foreign_key, :company_id, :organization_id
-    with_option :foreign_type, :company_type, :organization_type
+    with_option :foreign_type, :company_type, :organization_type, polymorphic: true
     with_option :primary_key, :id, :company_id
     with_option :dependent, :destroy, :nullify
     with_option :counter_cache, true, false
