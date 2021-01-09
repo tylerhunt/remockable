@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.7 (2021-01-09)
+
+  * Support Rails 6.0, 6.1 ([AGuyNamedRyan][aguynamedryan])
+
 ## 0.3.6 (2018-05-07)
 
   * Support Rails 5.2 ([Tyler Hunt][tylerhunt])
