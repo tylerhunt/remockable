@@ -8,15 +8,15 @@ Gem::Specification.new do |spec|
   spec.homepage = 'http://github.com/tylerhunt/remockable'
   spec.license = 'MIT'
 
-  spec.add_dependency 'activemodel', '>= 4.0', '< 5.3'
-  spec.add_dependency 'activerecord', '>= 4.0', '< 5.3'
-  spec.add_dependency 'activesupport', '>= 4.0', '< 5.3'
+  spec.add_dependency 'activemodel', '>= 4.0', '< 6.2'
+  spec.add_dependency 'activerecord', '>= 4.0', '< 6.2'
+  spec.add_dependency 'activesupport', '>= 4.0', '< 6.2'
   spec.add_dependency 'rspec-core', '~> 3.0'
   spec.add_dependency 'rspec-expectations', '~> 3.0'
   spec.add_dependency 'rspec-mocks', '~> 3.0'
   spec.add_development_dependency 'appraisal', '~> 2.1'
   spec.add_development_dependency 'rake'
-  spec.add_development_dependency 'sqlite3', '~> 1.3.4'
+  spec.add_development_dependency 'sqlite3', '~> 1.4.2'
 
   spec.files = `git ls-files`.split($/)
   spec.executables = spec.files.grep(%r{^bin/}) { |file| File.basename(file) }
