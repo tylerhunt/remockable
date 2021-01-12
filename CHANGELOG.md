@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.3.7 (2021-01-09)
+## 0.3.7 (2021-01-12)
 
   * Support Rails 6.0, 6.1 ([AGuyNamedRyan][])
 
