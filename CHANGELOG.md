@@ -2,7 +2,7 @@
 
 ## 0.3.7 (2021-01-09)
 
-  * Support Rails 6.0, 6.1 ([AGuyNamedRyan][aguynamedryan])
+  * Support Rails 6.0, 6.1 ([AGuyNamedRyan][])
 
 ## 0.3.6 (2018-05-07)
 
@@ -119,7 +119,8 @@
 
   * Initial release ([Tyler Hunt][tylerhunt])
 
+[aguynamedryan]: https://github.com/aguynamedryan
 [jswanner]: https://github.com/jswanner
+[nbibler]: https://github.com/nbibler
 [olivierlacan]: https://github.com/olivierlacan
 [tylerhunt]: https://github.com/tylerhunt
-[nbibler]: https://github.com/nbibler
