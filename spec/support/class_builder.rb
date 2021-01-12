@@ -14,7 +14,7 @@ class_builder = Module.new do
   def create_table(table_name, options={}, &block)
     begin
       drop_table table_name
-      ActiveRecord::Base.connection.create_table table_name, options, &block
+      ActiveRecord::Base.connection.create_table table_name, **options, &block
       created_tables << table_name
     rescue
       drop_table table_name
