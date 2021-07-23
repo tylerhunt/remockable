@@ -45,22 +45,6 @@ describe :have_index do
       end
     end
 
-    context 'with option :unique' do
-      it 'matches if the index exists' do
-        ActiveRecord::Base.connection.add_index :users, :one, unique: true
-        expect(model).to have_index :one, unique: true
-      end
-
-      it 'does not match if the index is not unique' do
-        ActiveRecord::Base.connection.add_index :users, :one
-        expect(model).to_not have_index :one, unique: true
-      end
-
-      it 'does not match if the index does not exist' do
-        expect(model).to_not have_index :one, unique: true
-      end
-    end
-
     context 'with option :name' do
       it 'matches if the index exists' do
         ActiveRecord::Base.connection.add_index :users, :one, name: :oneness
@@ -80,6 +64,22 @@ describe :have_index do
 
       it 'does not match if the index does not exist' do
         expect(model).to_not have_index name: :oneness
+      end
+    end
+
+    context 'with option :unique' do
+      it 'matches if the index exists' do
+        ActiveRecord::Base.connection.add_index :users, :one, unique: true
+        expect(model).to have_index :one, unique: true
+      end
+
+      it 'does not match if the index is not unique' do
+        ActiveRecord::Base.connection.add_index :users, :one
+        expect(model).to_not have_index :one, unique: true
+      end
+
+      it 'does not match if the index does not exist' do
+        expect(model).to_not have_index :one, unique: true
       end
     end
 
