@@ -82,5 +82,21 @@ describe :have_index do
         expect(model).to_not have_index name: :oneness
       end
     end
+
+    context 'with option :where' do
+      it 'matches if the index exists' do
+        ActiveRecord::Base.connection.add_index :users, :one, where: 'two = 2'
+        expect(model).to have_index :one, where: 'two = 2'
+      end
+
+      it 'does not match if the index conditions are different' do
+        ActiveRecord::Base.connection.add_index :users, :one, where: 'two = 2'
+        expect(model).to_not have_index :one, where: 'two = 1'
+      end
+
+      it 'does not match if the index does not exist' do
+        expect(model).to_not have_index :one, where: 'two = 2'
+      end
+    end
   end
 end

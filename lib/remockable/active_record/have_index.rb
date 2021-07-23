@@ -1,15 +1,14 @@
 RSpec::Matchers.define(:have_index) do
   include Remockable::ActiveRecord::Helpers
 
-  valid_options %w(name unique)
+  valid_options %w(name unique where)
 
   def column_names
     @column_names ||= expected_as_array.flatten.collect(&:to_s)
   end
 
   match do |actual|
-    name = options[:name]
-    unique = options[:unique]
+    name, unique, where = options.values_at(:name, :unique, :where)
     indexes = ActiveRecord::Base.connection.indexes(subject.class.table_name)
 
     index = indexes.detect do |index|
@@ -23,8 +22,9 @@ RSpec::Matchers.define(:have_index) do
     if index
       name_matches = name.nil? || matches_name?(index, name)
       unique_matches = unique.nil? || index.unique == unique
+      where_matches = where.nil? || index.where == where
 
-      name_matches && unique_matches
+      name_matches && unique_matches && where_matches
     end
   end
 

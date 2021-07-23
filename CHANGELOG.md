@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+  * Add `:where` option to `have_index` ([Tyler Hunt][tylerhunt])
+
 ## 0.3.7 (2021-01-12)
 
   * Support Rails 6.0, 6.1 ([AGuyNamedRyan][])
