@@ -1,5 +1,5 @@
 shared_examples_for 'an Active Record matcher' do
-  let(:matcher_name) do 
+  let(:matcher_name) do
     if self.class.respond_to?(:module_parent)
       self.class.module_parent.module_parent.description
     else
