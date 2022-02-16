@@ -19,8 +19,15 @@ RSpec::Matchers.define(:belong_to) do
 
   match do |actual|
     if association = subject.class.reflect_on_association(attribute)
+      if ActiveRecord.version > Gem::Version.new('5.0')
+        if options.key?(:required)
+          options[:optional] = !options.delete(:required)
+        end
+      end
+
       macro_matches = association.macro == :belongs_to
       options_match = association.options.slice(*options.keys) == options
+
       macro_matches && options_match
     end
   end

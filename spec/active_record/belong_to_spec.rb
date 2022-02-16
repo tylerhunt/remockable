@@ -55,6 +55,7 @@ describe :belong_to do
     with_option :inverse_of, :users, :employees
 
     if ActiveRecord.version > Gem::Version.new('5.0')
+      with_option :required, false, true
       with_option :optional, true, false
     else
       with_option :required, true, false
