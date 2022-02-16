@@ -1,3 +1,10 @@
+appraise 'rails-4.2' do
+  gem 'activemodel', '~> 4.2'
+  gem 'activerecord', '~> 4.2'
+  gem 'activesupport', '~> 4.2'
+  gem 'sqlite3', '~> 1.3.6'
+end
+
 appraise 'rails-5.0' do
   gem 'activemodel', '~> 5.0.0'
   gem 'activerecord', '~> 5.0.0'
