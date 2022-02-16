@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+  * Allow `:required`/`:optional` aliases with `belongs_to`
+    ([Tyler Hunt][tylerhunt])
+
 ## 0.3.8 (2021-07-23)
 
   * Add `:where` option to `have_index` ([Tyler Hunt][tylerhunt])

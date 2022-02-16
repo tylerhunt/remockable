@@ -7,9 +7,15 @@ shared_examples_for 'an Active Record matcher' do
     end
   end
 
-  def self.with_option(option_name, positive, negative, context={})
+  def self.with_option(
+    option_name,
+    positive,
+    negative,
+    context={},
+    macro_option={ option_name => positive }
+  )
     context "with option #{option_name.inspect}" do
-      let(:options) { context.merge(option_name => positive) }
+      let(:options) { context.merge(macro_option) }
 
       before do
         model.send macro, :company, **options
