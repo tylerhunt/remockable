@@ -11,11 +11,11 @@ RSpec::Matchers.define(:have_index) do
     name, unique, where = options.values_at(:name, :unique, :where)
     indexes = ActiveRecord::Base.connection.indexes(subject.class.table_name)
 
-    index = indexes.detect do |index|
+    index = indexes.detect do |idx|
       if column_names.any?
-        index.columns == column_names
+        idx.columns == column_names
       elsif name
-        matches_name?(index, name)
+        matches_name?(idx, name)
       end
     end
 

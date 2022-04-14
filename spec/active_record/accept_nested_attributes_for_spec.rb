@@ -33,12 +33,12 @@ describe :accept_nested_attributes_for do
       let(:options) { :company }
 
       it 'matches if the model accepts the nested attributes' do
-        model.accepts_nested_attributes_for *options
-        expect(model).to accept_nested_attributes_for *options
+        model.accepts_nested_attributes_for(*options)
+        expect(model).to accept_nested_attributes_for(*options)
       end
 
       it 'does not match if the model does not accept the nested attributes' do
-        expect(model).to_not accept_nested_attributes_for *options
+        expect(model).to_not accept_nested_attributes_for(*options)
       end
     end
 

@@ -7,7 +7,7 @@ class_builder = Module.new do
         end
       EVAL
 
-      class_eval &block if block_given?
+      class_eval(&block) if block_given?
     end
   end
 

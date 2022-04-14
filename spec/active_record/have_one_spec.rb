@@ -28,17 +28,17 @@ describe :have_one do
       let(:options) { :address }
 
       it 'matches if the association exists' do
-        model.has_one *options
-        expect(model).to have_one *options
+        model.has_one(*options)
+        expect(model).to have_one(*options)
       end
 
       it 'does not match if the association does not exist' do
-        expect(model).to_not have_one *options
+        expect(model).to_not have_one(*options)
       end
 
       it 'does not match if the association is of the wrong type' do
-        model.has_many *options
-        expect(model).to_not have_one *options
+        model.has_many(*options)
+        expect(model).to_not have_one(*options)
       end
     end
 
