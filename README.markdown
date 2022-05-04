@@ -1,11 +1,13 @@
 # Remockable
 
-[![Build Status][travis-image]][travis] [![Dependency Status][gemnasium-image]][gemnasium] [![Gem Version][rubygems-image]][rubygems]
+[![Build][build-image]][build]
+[![Maintainability][codeclimate-image]][codeclimate]
+[![Gem Version][rubygems-image]][rubygems]
 
-[travis]: https://travis-ci.org/tylerhunt/remockable
-[travis-image]: https://travis-ci.org/tylerhunt/remockable.svg?branch=master
-[gemnasium]: https://gemnasium.com/github.com/tylerhunt/remockable
-[gemnasium-image]: https://gemnasium.com/badges/github.com/tylerhunt/remockable.svg
+[build]: https://github.com/tylerhunt/remockable/actions/workflows/build.yml?query=branch%3Amaster
+[build-image]: https://github.com/tylerhunt/remockable/actions/workflows/build.yml/badge.svg
+[codeclimate]: https://codeclimate.com/github/tylerhunt/remockable/maintainability
+[codeclimate-image]: https://api.codeclimate.com/v1/badges/c95736ab7cca49228f5c/maintainability
 [rubygems]: https://badge.fury.io/rb/remockable
 [rubygems-image]: https://badge.fury.io/rb/remockable.svg
 
@@ -92,13 +94,13 @@ it { should have_many :subscriptions, through: :customers }
 
 ## Contributing
 
-1. Fork it.
-2. Create your feature branch (`git checkout -b my-new-feature`).
-3. Commit your changes (`git commit -am 'Added some feature'`).
-4. Push to the branch (`git push origin my-new-feature`).
-5. Create a new Pull Request.
+  1. Fork it.
+  2. Create your feature branch (`git checkout -b my-new-feature`).
+  3. Commit your changes (`git commit -am 'Added some feature'`).
+  4. Push to the branch (`git push origin my-new-feature`).
+  5. Create a new Pull Request.
 
 
 ## Copyright
 
-Copyright © 2010-2013 Tyler Hunt. See LICENSE for details.
+Copyright © 2010–2022 Tyler Hunt. See LICENSE for details.
