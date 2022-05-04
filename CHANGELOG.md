@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.3.9 (2022-05-04)
 
   * Allow `:required`/`:optional` aliases with `belongs_to`
     ([Tyler Hunt][tylerhunt])
