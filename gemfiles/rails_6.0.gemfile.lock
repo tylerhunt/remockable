@@ -12,12 +12,12 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    activemodel (6.0.3.4)
-      activesupport (= 6.0.3.4)
-    activerecord (6.0.3.4)
-      activemodel (= 6.0.3.4)
-      activesupport (= 6.0.3.4)
-    activesupport (6.0.3.4)
+    activemodel (6.0.4.8)
+      activesupport (= 6.0.4.8)
+    activerecord (6.0.4.8)
+      activemodel (= 6.0.4.8)
+      activesupport (= 6.0.4.8)
+    activesupport (6.0.4.8)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
@@ -27,18 +27,18 @@ GEM
       bundler
       rake
       thor (>= 0.14.0)
-    concurrent-ruby (1.1.7)
+    concurrent-ruby (1.1.10)
     diff-lcs (1.5.0)
-    i18n (1.8.7)
+    i18n (1.10.0)
       concurrent-ruby (~> 1.0)
-    minitest (5.14.3)
+    minitest (5.15.0)
     rake (13.0.3)
     rspec-core (3.11.0)
       rspec-support (~> 3.11.0)
     rspec-expectations (3.11.0)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.11.0)
-    rspec-mocks (3.11.0)
+    rspec-mocks (3.11.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.11.0)
     rspec-support (3.11.0)
@@ -47,7 +47,7 @@ GEM
     thread_safe (0.3.6)
     tzinfo (1.2.9)
       thread_safe (~> 0.1)
-    zeitwerk (2.4.2)
+    zeitwerk (2.5.4)
 
 PLATFORMS
   ruby
