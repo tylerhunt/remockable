@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+  * Support symbol values for `:reject_if` option on
+    `accept_nested_attributes_for` ([Tyler Hunt][tylerhunt])
+
 ## 0.3.9 (2022-05-04)
 
   * Allow `:required`/`:optional` aliases with `belongs_to`

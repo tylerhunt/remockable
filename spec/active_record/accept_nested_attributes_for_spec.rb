@@ -44,8 +44,11 @@ describe :accept_nested_attributes_for do
 
     with_option :allow_destroy, true, false
     with_option :limit, 1, 2
-    with_option :update_only, true, false
 
-    with_unsupported_option :reject_if, :all_blank
+    with_option :reject_if, :all_blank, :all_empty do
+      raise_on_invalid_value -> {}, /cannot compare proc values/
+    end
+
+    with_option :update_only, true, false
   end
 end
