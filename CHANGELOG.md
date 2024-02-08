@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.3.10 (2024-02-08)
 
   * Support symbol values for `:reject_if` option on
     `accept_nested_attributes_for` ([Tyler Hunt][tylerhunt])
