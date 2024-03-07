@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.3.11 (2024-03-07)
 
   * Fix `allow_values_for` matcher when negated ([Tyler Hunt][tylerhunt])
 
