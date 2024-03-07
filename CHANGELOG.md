@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+  * Fix `allow_values_for` matcher when negated ([Tyler Hunt][tylerhunt])
+
 ## 0.3.10 (2024-02-08)
 
   * Support symbol values for `:reject_if` option on
